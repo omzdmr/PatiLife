@@ -125,3 +125,14 @@ Dark mode is designed simultaneously with light mode.
 - Giant FAB obscuring content
 - Ads placed beside save/confirm/care actions
 - UI that requires five taps for a one-number log
+
+
+## Implementation lock — 2026-09-22
+
+The approved board in `docs/assets/patilife-design-reference.jpg` is the visual source of truth. Future development may improve responsiveness, accessibility and platform-native behavior, but must not casually replace the established palette, hierarchy, photography-first surfaces, rounded-card language or restrained motion.
+
+The mockup board contains an obsolete temporary “PawLife” footer mark. **PatiLife** is the authoritative product name everywhere.
+
+Before changing the visual system, a development run must have either:
+1. an explicit user design decision, or
+2. strong research evidence recorded in GitHub and a documented design handoff.

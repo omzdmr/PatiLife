@@ -154,3 +154,29 @@ A feature is not “done” merely because a screen exists. For significant feat
 11. Research-driven extensions
 
 This roadmap is directional, not an excuse to ignore strong research evidence. Research handoffs should be evaluated, accepted/rejected explicitly, and folded into this spec when warranted.
+
+
+## Localization contract
+
+PatiLife must be architected for these first-class UI locales from the beginning:
+- English
+- Simplified Chinese
+- Japanese
+- Korean
+- German
+- French
+- Turkish
+
+English is the global fallback. UI language is independent from pet/user-entered data. New user-visible features must not knowingly create a localization dead end. Translation coverage is a release-quality requirement; partially translated screens must not be presented as complete language support.
+
+## Compact-app contract
+
+PatiLife should remain compact without cutting useful features. The strategy is dependency and asset discipline:
+- system fonts by default
+- no bundled stock-photo/video packs in production
+- resize/compress user photos on import instead of shipping media assets
+- avoid duplicate libraries that solve the same problem
+- keep ad SDKs isolated and absent until monetization is actually enabled
+- measure Android and iOS binary-size deltas in reproducible release builds
+
+See `docs/APP_SIZE_BUDGET.md`.
