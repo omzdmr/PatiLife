@@ -1,0 +1,188 @@
+{
+  "@@locale": "en",
+  "@todayWithPet": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "@todayTasksPlanned": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@quickLogHint": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "@activePetChange": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "@profilePhotoSemantic": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "@petHeroSemantic": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      },
+      "breed": {
+        "type": "String"
+      },
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@saveQuickTitle": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "@nowForPet": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "@savedMessage": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "@healthSubtitle": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      }
+    }
+  },
+  "@togetherDays": {
+    "placeholders": {
+      "petName": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "appTitle": "PatiLife",
+  "navToday": "Today",
+  "navHealth": "Health",
+  "navDiary": "Diary",
+  "navProfile": "Profile",
+  "greetingMorning": "Good morning",
+  "todayWithPet": "Today with {petName}",
+  "todayTitle": "Today",
+  "todayTasksPlanned": "{count} care tasks planned",
+  "quickLogTitle": "Quick log",
+  "quickLogSubtitle": "Frequent actions, one tap away",
+  "statusGood": "Doing well",
+  "supplementVitamin": "Vitamin",
+  "dailySupplement": "Daily supplement",
+  "meal": "Meal",
+  "wetFood": "Wet food",
+  "mixedVaccine": "Core vaccine",
+  "upcomingHealthTask": "Upcoming health task",
+  "latestStatus": "Latest",
+  "weight": "Weight",
+  "todayFood": "Food today",
+  "quickWeight": "Weight",
+  "quickFood": "Food",
+  "quickMedication": "Medication",
+  "quickToilet": "Toilet",
+  "quickNote": "Note",
+  "quickPhoto": "Photo",
+  "quickLogHint": "Open a quick log for {petName}",
+  "activePetChange": "Active pet {petName}. Change pet.",
+  "profilePhotoSemantic": "{petName} profile photo",
+  "petHeroSemantic": "{petName}, {breed}, {weight}",
+  "completed": "completed",
+  "saveQuickTitle": "Log {label}",
+  "nowForPet": "{petName} · now",
+  "fieldWeight": "Weight",
+  "fieldAmount": "Amount",
+  "fieldMedicationSupplement": "Medication or supplement",
+  "fieldObservation": "Observation",
+  "fieldNote": "Note",
+  "fieldPhotoNote": "Photo note",
+  "shortNoteHint": "Add a short note",
+  "todayNow": "Today · Now",
+  "change": "Change",
+  "save": "Save",
+  "savedMessage": "{label} saved",
+  "healthTitle": "Health",
+  "healthSubtitle": "{petName}'s health and care history",
+  "weightTrend": "Weight trend",
+  "weightChange30": "+90 g / 30 days",
+  "carePlan": "Care plan",
+  "carePlanSubtitle": "Upcoming and recurring health tasks",
+  "records": "Records",
+  "documents": "Documents",
+  "allergy": "Allergy",
+  "none": "None",
+  "vaccines": "Vaccines",
+  "upcoming": "Upcoming",
+  "medications": "Medications",
+  "current": "Current",
+  "parasiteTreatments": "Parasite treatments",
+  "lastApplied": "Last applied Sep 18",
+  "vetVisits": "Vet visits",
+  "lastVisit": "Last visit 2 weeks ago",
+  "diaryTitle": "Diary",
+  "diarySubtitle": "Care records and good memories",
+  "filterAll": "All",
+  "memories": "Memories",
+  "care": "Care",
+  "memoryDate1": "Sep 21",
+  "memoryDate2": "Sep 20",
+  "memoryTitle": "Misket found the comfiest spot on the sofa again.",
+  "memoryDetail": "Finished all of the morning meal.",
+  "normal": "Normal",
+  "vet": "Vet",
+  "vaccineDone": "Core vaccine given",
+  "vaccineDoneDetail": "A check-up note was added and the next dose scheduled.",
+  "editProfile": "Edit profile",
+  "age": "Age",
+  "sex": "Sex",
+  "female": "Female",
+  "about": "About",
+  "birthday": "Birthday",
+  "neutered": "Neutered",
+  "yes": "Yes",
+  "microchip": "Microchip",
+  "notAdded": "Not added",
+  "veterinarian": "Veterinarian",
+  "togetherDays": "{petName} has been with you for {days} days",
+  "togetherSubtitle": "Here's to many more good days together.",
+  "onboardingSkip": "Skip for now",
+  "onboardingHeadline": "They're family, too.",
+  "onboardingSubtitle": "Health, care and good memories in one calm place.",
+  "onboardingQuestion": "Who do you live with?",
+  "cat": "Cat",
+  "dog": "Dog",
+  "bird": "Bird",
+  "other": "Other",
+  "continueAction": "Continue",
+  "welcomeGraphicSemantic": "PatiLife welcome image"
+}

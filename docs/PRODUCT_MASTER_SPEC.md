@@ -158,16 +158,23 @@ This roadmap is directional, not an excuse to ignore strong research evidence. R
 
 ## Localization contract
 
-PatiLife must be architected for these first-class UI locales from the beginning:
-- English
-- Simplified Chinese
-- Japanese
-- Korean
-- German
-- French
-- Turkish
+PatiLife must be architected for these **10 first-class UI locales** from the beginning:
+- English (`en`) — global fallback
+- Turkish (`tr`)
+- Spanish, Latin America (`es-419`)
+- Portuguese, Brazil (`pt-BR`)
+- Simplified Chinese (`zh-CN`)
+- Hindi (`hi`)
+- Indonesian (`id`)
+- Japanese (`ja`)
+- German (`de`)
+- French (`fr`)
 
-English is the global fallback. UI language is independent from pet/user-entered data. New user-visible features must not knowingly create a localization dead end. Translation coverage is a release-quality requirement; partially translated screens must not be presented as complete language support.
+The same ten launch languages are targeted for App Store and Google Play metadata/localized screenshots where the stores support them.
+
+UI language is independent from pet/user-entered data. New user-visible features must use the localization layer rather than hard-coded strings. Locale-sensitive dates, numbers and units must be formatted by locale. Accessibility labels are localized. English is the global fallback; a partially translated screen must not be presented as complete support for that language.
+
+See `docs/LOCALIZATION.md` for locale/store mappings and engineering rules.
 
 ## Compact-app contract
 
