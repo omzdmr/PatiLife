@@ -31,7 +31,7 @@ The design reference lives at `docs/assets/patilife-design-reference.jpg` when a
 - Multiple pets
 - Name, species, breed, sex, birthday/estimated age, adoption date
 - Weight and healthy-weight history
-- Microchip / ID
+- Microchip / ID; microchip records may include optional registry/provider and last-contact-verification date because PatiLife is not the registry of record
 - Neutered/spayed state
 - Primary vet and emergency contact
 - Profile photography
@@ -47,6 +47,7 @@ The design reference lives at `docs/assets/patilife-design-reference.jpg` when a
 - Lab/document attachments
 - Symptoms / observations
 - Exportable vet summary
+- Durable documents preserve the original attachment where practical and carry type/date/event linkage plus optional external reference metadata. Invoice, insurance/EOB, prescription, lab, discharge note and official travel document are document types, not separate product silos.
 
 ### 3. Daily care
 - Feeding and water
@@ -83,11 +84,21 @@ Future architecture must leave room for:
 - Shared household access
 - Durable household member roles and temporary pet-sitter/handoff grants are separate concepts.
 - Pet-sitter/handoff access should be scoped, revocable and time-bounded when remote sharing is implemented; shared passwords are not the handoff model.
+- A sitter care brief is a deliberately scoped operational projection: feeding, medication instructions, routine, behavior/fears, bathroom habits, vet/emergency contacts and selected critical health facts. It must not expose unrelated diary, lab or financial history by default.
+- The sitter brief must remain printable/offline; remote expiring links can extend it later.
 - Emergency card
 - Read-only vet/export share
 - Clear ownership and privacy boundaries
 
-### 7. Insights
+### 7. Emergency and travel
+- Emergency Card is an offline, read-only projection over existing Profile + Health facts rather than a separately maintained emergency database.
+- Default emergency facts: pet photo/name/species, ID/microchip, owner/emergency contacts, primary/emergency vet, allergies/conditions, active medications/critical instructions and key vaccination status.
+- Travel Pack may organize scans of official passports/certificates, vaccination/rabies information, microchip identity, medications, vet/emergency contacts and expiry/due dates, and generate an offline/printable summary.
+- A PatiLife-generated travel summary must never be represented as an official government/veterinary pet passport or animal health certificate. Official-document scans remain distinguishable from app-generated summaries.
+- Country-specific travel-rule guidance is optional/later and requires an authoritative maintained source; do not hard-code a static worldwide legal-rule encyclopedia into the core app.
+- Public lost-pet QR/profile hosting is optional/later because it introduces backend availability, abuse/privacy and stale-contact obligations. Core emergency identity must not depend on it.
+
+### 8. Insights
 - Weight trends
 - Feeding/water trends where captured
 - Medication adherence
@@ -116,6 +127,8 @@ Future architecture must leave room for:
 - The local database is the authoritative core record. Optional backup/sync/collaboration may extend it, but must not make an account or network connection necessary to read and edit core records.
 - User-owned records must have an exit path: plan a human-readable per-pet/date-range PDF and a machine-readable full-data export. Export must not become inaccessible merely because a paid plan expires.
 - Today quick logs, Health records and Diary presentation should project coherent views over durable per-pet history where event semantics overlap, rather than forcing users to reconstruct a story from unrelated silos.
+- Medical/legal/insurance source attachments should not be destructively recompressed merely to save space. Generated previews may be optimized separately while the source file remains retrievable.
+- PatiLife may store insurance documents, invoices, EOBs and external claim references, but insurer claim status is not authoritative without an integration. Do not create a fake local claim-status truth.
 
 ## Monetization / ads
 PatiLife may add ads later, so placement abstractions should be designed early without forcing a production ad SDK now.
@@ -130,6 +143,7 @@ Forbidden ad locations:
 - Any screen where an ad can be confused with a care action
 - Reminder completion, care logging, export or data-recovery actions
 - Timeline/history retrieval, health trends and sitter/vet handoff actions must not be gated by rewarded or interstitial ads
+- Emergency Card, lost-pet identity, sitter handoff, Travel Pack/official-document access and insurance/document retrieval are trust-heavy surfaces and must not be interrupted or unlocked by rewarded/interstitial ads
 
 Possible low-friction placements for the free tier:
 - A clearly labeled low-profile native/banner slot after the Today task section
@@ -166,12 +180,12 @@ A feature is not “done” merely because a screen exists. For significant feat
 8. Weight/statistics
 9. Documents/export/emergency card
 10. Household/pet-sitter handoff
-11. Research-driven extensions
+11. Travel Pack and research-driven extensions
 
 This roadmap is directional, not an excuse to ignore strong research evidence. Research handoffs should be evaluated, accepted/rejected explicitly, and folded into this spec when warranted.
 
 ## Research-accepted constraints — 2026-09-22
-Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md`, `research/2026-09-22-0307-shared-care-trust.md` and `research/2026-09-22-0424-daily-care-life-stage-timeline.md`.
+Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md` and the dated snapshots under `research/`.
 - Reminder/care data is modeled as recoverable occurrences with status, actor and timestamp; notifications are a delivery mechanism, not the source of truth.
 - Core local records stay account-free/offline-capable. Optional sync or household collaboration cannot become the only copy or the only way to access core data.
 - Data portability is a trust requirement: PDF handoff plus machine-readable export are planned capabilities, and existing user data is never held hostage to subscription state.
@@ -180,6 +194,10 @@ Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md`, `research/2026-09-22-030
 - Daily-care breadth is handled through progressive disclosure and adaptable shortcuts, not giant forms or a top-level module per behavior.
 - Per-pet history is a durable product surface: as records accumulate it must remain retrievable by date range, event category and free text; report/export uses the same filtering semantics.
 - Life-stage depth is optional and contextual: precise growth trajectories and senior/chronic observations are supported without forcing disease-specific tools or generic medical scores onto healthy-pet users.
+- Emergency/sitter/travel experiences should reuse existing identity, health and document records as scoped projections rather than duplicate data stores.
+- Microchip reference data should leave room for registry/provider and verification metadata; storing a chip number is not equivalent to registering/updating the chip.
+- Generated travel summaries are convenience records, never represented as official passports/certificates.
+- Insurance value in the core product is durable document organization/provenance, not insurer-specific claim processing.
 
 ## Localization contract
 
