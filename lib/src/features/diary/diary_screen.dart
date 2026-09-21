@@ -13,14 +13,14 @@ class DiaryScreen extends StatelessWidget {
     return PatiPage(
       title: l10n.diaryTitle,
       subtitle: l10n.diarySubtitle,
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _FilterRow(),
-          const SizedBox(height: PatiSpace.lg),
-          const _PhotoMemory(),
-          const SizedBox(height: PatiSpace.md),
-          const _CareMemory(),
+          _FilterRow(),
+          SizedBox(height: PatiSpace.lg),
+          _PhotoMemory(),
+          SizedBox(height: PatiSpace.md),
+          _CareMemory(),
         ],
       ),
     );
