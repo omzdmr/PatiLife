@@ -19,11 +19,8 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const SizedBox(
               height: 294,
-              child: Hero(
-                tag: 'active-pet-photo',
-                child: PetPhotoSurface(
-                  semanticLabel: 'Misket profil fotoğrafı',
-                ),
+              child: PetPhotoSurface(
+                semanticLabel: 'Misket profil fotoğrafı',
               ),
             ),
             const SizedBox(height: PatiSpace.md),

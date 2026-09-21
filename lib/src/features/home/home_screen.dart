@@ -82,9 +82,7 @@ class _PetHeroCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SizedBox(
         height: 286,
-        child: Hero(
-          tag: 'active-pet-photo',
-          child: PetPhotoSurface(
+        child: PetPhotoSurface(
             semanticLabel: 'Misket, British Shorthair, 2.4 kilogram',
             child: Stack(
               children: [
@@ -167,7 +165,6 @@ class _PetHeroCard extends StatelessWidget {
                 ),
               ],
             ),
-          ),
         ),
       );
 }

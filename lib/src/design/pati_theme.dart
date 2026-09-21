@@ -133,7 +133,7 @@ abstract final class PatiTheme {
           final selected = states.contains(WidgetState.selected);
           return textTheme.labelMedium?.copyWith(
             fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
-            color: selected ? PatiColors.sageDeep : muted,
+            color: selected ? PatiColors.sage : muted,
           );
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {

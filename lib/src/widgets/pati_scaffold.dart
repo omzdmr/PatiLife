@@ -24,9 +24,6 @@ class PatiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomScrollView(
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
-        ),
         slivers: [
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(
