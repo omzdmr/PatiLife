@@ -6,11 +6,7 @@ import '../../widgets/pati_surfaces.dart';
 enum _Species { cat, dog, bird, other }
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({
-    super.key,
-    required this.onFinished,
-  });
-
+  const OnboardingScreen({super.key, required this.onFinished});
   final VoidCallback onFinished;
 
   @override
@@ -37,13 +33,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final media = MediaQuery.of(context);
+    final reduceMotion = media.disableAnimations;
+    final textScale = media.textScaler.scale(1);
+
     return Scaffold(
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final compact = constraints.maxHeight < 720;
-            final heroHeight = compact ? 190.0 : 250.0;
+            final compact = constraints.maxHeight < 720 || textScale >= 1.6;
+            final heroHeight = compact ? 180.0 : 250.0;
             final sectionGap = compact ? PatiSpace.lg : PatiSpace.xl;
+            final cardWidth = (constraints.maxWidth - PatiSpace.lg * 2 - 10) / 2;
 
             return SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(
@@ -101,72 +102,62 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: PatiSpace.md),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      mainAxisExtent: 72,
-                    ),
-                    itemCount: _Species.values.length,
-                    itemBuilder: (context, index) {
-                      final option = _Species.values[index];
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: _Species.values.map((option) {
                       final selected = species == option;
                       final label = _label(l10n, option);
-                      return Semantics(
-                        button: true,
-                        selected: selected,
-                        label: label,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(PatiRadius.medium),
-                          onTap: () => setState(() => species = option),
-                          child: AnimatedContainer(
-                            duration: PatiMotion.quick,
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            decoration: BoxDecoration(
-                              color: selected
-                                  ? PatiColors.sage.withValues(alpha: .14)
-                                  : Theme.of(context).colorScheme.surface,
-                              border: Border.all(
-                                color: selected
-                                    ? PatiColors.sage
-                                    : Theme.of(context)
-                                        .colorScheme
-                                        .outlineVariant,
-                                width: selected ? 1.4 : 1,
+                      return SizedBox(
+                        width: cardWidth,
+                        child: Semantics(
+                          button: true,
+                          selected: selected,
+                          label: label,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(PatiRadius.medium),
+                            onTap: () => setState(() => species = option),
+                            child: AnimatedContainer(
+                              duration: reduceMotion ? Duration.zero : PatiMotion.quick,
+                              constraints: const BoxConstraints(minHeight: 72),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15,
+                                vertical: 12,
                               ),
-                              borderRadius:
-                                  BorderRadius.circular(PatiRadius.medium),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  icons[option],
+                              decoration: BoxDecoration(
+                                color: selected
+                                    ? PatiColors.sage.withValues(alpha: .14)
+                                    : Theme.of(context).colorScheme.surface,
+                                border: Border.all(
                                   color: selected
-                                      ? PatiColors.sageDeep
-                                      : Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant,
+                                      ? PatiColors.sage
+                                      : Theme.of(context).colorScheme.outlineVariant,
+                                  width: selected ? 1.4 : 1,
                                 ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: Text(
-                                    label,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style:
-                                        Theme.of(context).textTheme.labelLarge,
+                                borderRadius: BorderRadius.circular(PatiRadius.medium),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    icons[option],
+                                    color: selected
+                                        ? PatiColors.sageDeep
+                                        : Theme.of(context).colorScheme.onSurfaceVariant,
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Text(
+                                      label,
+                                      style: Theme.of(context).textTheme.labelLarge,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       );
-                    },
+                    }).toList(),
                   ),
                   SizedBox(height: sectionGap),
                   FilledButton(
