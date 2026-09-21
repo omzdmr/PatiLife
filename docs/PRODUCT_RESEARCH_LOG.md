@@ -45,50 +45,61 @@ This is the permanent research memory for PatiLife. Detailed source snapshots li
 ### 2026-09-22 05:26 +08 — Emergency identity, travel, sitter handoff and document provenance
 **Detailed snapshot:** `research/2026-09-22-0526-emergency-travel-handoff-documents.md`
 
-**Scope:** emergency/lost-pet identity, microchip metadata, travel records, temporary sitter care brief, insurance/claim document organization, monetization/privacy. Market rotation: English/global, French, German, Japanese, Turkish; official EU and AAHA sources used for travel/emergency facts.
+**Accepted findings**
+- Emergency, sitter and travel workflows should project the same Profile/Health facts rather than create duplicate databases.
+- Microchip reference data benefits from registry/provider and last-verification metadata; a chip number is not proof of current registration.
+- Generated Travel Packs are convenience summaries, never official passports/certificates.
+- Sitter briefs should be scoped operational handoffs rather than full-history sharing.
+- Insurance usefulness in core is durable document organization/provenance, not pretending to know insurer claim state.
+- No new safe ad surface emerged for emergency/sitter/travel/document retrieval.
 
-**Sources (accessed 2026-09-22):**
-- EU pet travel rules (last checked 2026-09-01): https://europa.eu/youreurope/citizens/travel/carry/pets-and-other-animals/index_en.htm
-- European Commission intra-EU movement: https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets/movements-within-eu_en
-- European Commission non-EU entry: https://food.ec.europa.eu/animals/live-animal-movements/dogs-cats-and-ferrets/bringing-pet-eu-non-eu-country_en
-- AAHA microchip lookup: https://www.aaha.org/for-veterinary-professionals/microchip-registry-lookup-tool-aaha-find-your-pets-microchip-registry/
-- AAHA emergency preparedness: https://www.aaha.org/resources/storm-preparedness-for-pets/
-- OnePaw sitter care sheet: https://apps.apple.com/us/app/onepaw-pet-records-and-care/id6759019806
-- PetHandoff: https://pethandoff.app/
-- Pettioe travel record: https://www.pettioe.com/pet-passport
-- Keia FR/DE: https://keia.app/fr ; https://keia.app/de
-- BobbyPet DE: https://apps.apple.com/de/app/bobbypet/id6739954015
-- Animoo FR: https://apps.apple.com/fr/app/animoo-carnet-sant%C3%A9-animal/id6756840538
-- Petport JP: https://apps.apple.com/jp/app/petport-%E3%83%9A%E3%83%83%E3%83%88%E3%81%AE%E8%A8%98%E9%8C%B2%E3%81%A8%E5%81%A5%E5%BA%B7%E7%AE%A1%E7%90%86/id6810294176
-- Petsita TR: https://petsita.com/
-- PetGuru TR: https://www.petguru.app/
-- Fetch current listing/reviews: https://apps.apple.com/us/app/fetch-pet-insurance/id925165009
-- Pets Best current listing/reviews: https://apps.apple.com/us/app/pets-best-pet-health-insurance/id1177692522
-- Spot upload complaint, 2026-08-04: https://www.reddit.com/r/SpotPetInsurance/comments/1vfhgr9/app_online_portal_trouble/
-- Pets Best records complaint, 2026-06-01: https://www.reddit.com/r/petinsurancereviews/comments/1ttvp6u/pets_best_closed_my_claim_for_no_medical_records/
-- Rover omitted-medication-instructions case, 2025-03-11: https://www.reddit.com/r/RoverPetSitting/comments/1j8ttlu
+**Evidence strength:** high for projection/document architecture and scoped handoff; public lost-pet hosting/live global travel rules remain later/insufficient.
+
+---
+
+### 2026-09-22 06:05 +08 — Onboarding, accessibility, local-first recovery trust and monetization
+**Detailed snapshot:** `research/2026-09-22-0605-onboarding-accessibility-trust.md`
+
+**Scope:** first-run friction/time-to-value, accessibility and large-text/dark-mode completion, account/backup trust, monetization boundaries. Market rotation: English/global plus French/German competitor listings and Japanese Apple platform guidance.
+
+**Key sources (accessed 2026-09-22):**
+- Apple Accessibility Nutrition Labels: https://developer.apple.com/help/app-store-connect/manage-app-accessibility/overview-of-accessibility-nutrition-labels
+- Apple Japanese accessibility guidance: https://developer.apple.com/jp/help/app-store-connect/manage-app-accessibility/overview-of-accessibility-nutrition-labels
+- Apple Sign in with Apple HIG: https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple/
+- Android accessibility: https://developer.android.com/guide/topics/ui/accessibility/apps
+- Android/Google Play accessibility testing: https://developer.android.com/guide/topics/ui/accessibility/testing
+- PokiPaw current listing/changelog: https://apps.apple.com/us/app/pokipaw-pet-health-tracker/id6761670616
+- PetPal AI+ current listing/changelog: https://apps.apple.com/us/app/petpal-ai/id6759816292
+- Awwdit accessibility declarations: https://apps.apple.com/us/app/pet-care-tracker-awwdit/id6746352479
+- Whispet FR: https://apps.apple.com/fr/app/whispet-sant%C3%A9-soins/id6760017949
+- FurFamily FR: https://apps.apple.com/fr/app/furfamily-carnet-sant%C3%A9-animal/id6764331745
+- Pilou FR: https://apps.apple.com/fr/app/pilou-carnet-de-sant%C3%A9-animal/id6803716462
+- Pfotentagebuch DE: https://apps.apple.com/de/app/pfotentagebuch-haustier-app/id6800088082
+- Pet Health+ DE: https://apps.apple.com/de/app/pet-health-vaccine-tracker/id6737129774
+- Snout discussion (2026-09-14): https://www.reddit.com/r/iOSAppsMarketing/comments/1wg2kma/
+- PawProof discussion (2026-06-15): https://www.reddit.com/r/apps/comments/1u6wddb/
+- Pet-manager discussion (2026-03-30): https://www.reddit.com/r/AppIdeas/comments/1s7ixtn/
 
 **Repeated findings**
-- Emergency, sitter and travel workflows repeatedly reuse the same compact identity/health facts. PatiLife should project them from Profile/Health rather than create duplicate databases.
-- Microchip number alone is incomplete operationally. Registry/provider and a last-verification date are useful because owner contact data lives in registries and registry availability can change.
-- A PatiLife-generated travel PDF must be called a travel record/pack, not an official passport. EU passports and animal health certificates are official vet/state documents with changing legal requirements.
-- Temporary caregivers need a scoped operational brief: food, medication instructions, routine, behavior/fears, bathroom, vet/emergency contacts and selected critical health facts. Full diary/lab/financial history should not be shared by default.
-- Insurance usefulness is mostly document organization, provenance and retrieval. Recent complaints repeatedly involve missing uploads, opaque receipt/status and inability to prove what was submitted. PatiLife should preserve original invoices/records and useful metadata, not become an insurer portal.
-- Broad competitor apps add community/maps/adoption/weather/AI/social lost-pet feeds, but this run found no strong evidence those should become core PatiLife modules. Emergency card, sitter brief and travel pack add breadth by reusing existing records, which better fits the compact identity.
-- No new safe ad surface emerged. Emergency, sitter, travel-document and insurance/document retrieval/export are trust-heavy and should remain outside interstitial/rewarded gates.
+- First value should precede complete profile setup. Current competitors explicitly shorten onboarding, allow guest/no-account use, or reduce typing; platform guidance supports delaying sign-in and optional data collection.
+- PatiLife's first-run minimum should be enough to create a coherent local pet record and enter the shell; breed/birthday/sex/microchip/vet/insurance/history/documents can be progressively completed later. Unknown remains valid.
+- Permission requests should be contextual. Do not front-load notification/photo/account/paywall prompts before the user sees why they help.
+- Accessibility is now store-visible product information on Apple platforms. Apple expects common tasks to work for declared capabilities; Google Play pre-launch testing audits touch targets, contrast, labels and accessibility implementation.
+- PatiLife therefore needs a common-task accessibility release matrix, not scattered semantics checks: pet creation/switching, quick log, medication/reminder recovery, health record, Diary retrieval, Profile/Emergency Card, document/export.
+- FR/DE competitors repeatedly position no-account/offline/device-private storage as a benefit. Existing local-first direction is strengthened. A useful future backup UX should show configured state and last successful backup/recovery without making local logging depend on sync.
+- Monetization models remain heterogeneous (subscription, lifetime, free-one-pet, premium export/multi-pet, no-ads). No evidence justifies expanding PatiLife ad surfaces or choosing a pricing model yet.
 
 **Contradictions / uncertainty**
-- Niche apps often have sparse ratings; their feature sets reveal problems but do not prove satisfaction.
-- Public lost-pet QR/profile hosting may help, but creates backend availability, abuse/privacy and stale-contact obligations. It is not justified as core-v1.
-- PatiLife cannot know authoritative insurance claim status without insurer integration; do not invent a local status as truth.
-- Country travel rules change; static worldwide rule content would be a reliability liability without a maintained authoritative update path.
+- Many current pet apps are young with sparse reviews; feature/paywall choices are market signals, not satisfaction proof.
+- Developer launch posts are not independent validation and were used only for architecture/positioning context.
+- iCloud-only patterns do not solve Android parity; cross-platform backup provider/merge behavior still needs technical research.
+- This run found insufficient independent current Korean/Chinese/Turkish review evidence for a new market-specific requirement; none was invented.
 
 **RESEARCH HANDOFF**
-- Emergency Card: offline/read-only projection from existing pet/health data; no duplicate emergency store. **Evidence: high.**
-- Microchip: store number plus optional registry/provider and last verification date; clearly distinguish reference data from registry registration. **Evidence: high.**
-- Sitter Care Brief: printable/offline, deliberately scoped operational handoff; reuse later for expiring remote share. **Evidence: high.**
-- Travel Pack: official document attachments + expiry/due metadata + clearly non-official generated summary. **Evidence: high.**
-- Document architecture: preserve original files and type/date/event/external-reference metadata; insurance/EOB/invoice are document types rather than a new dashboard. **Evidence: high.**
-- Public lost-pet hosting, live global travel rules and insurer APIs remain optional/later. **Evidence for core inclusion: insufficient.**
+- First-run: minimum pet identity -> usable Today/Profile -> progressive completion; no account/paywall/permission burst before first value. **Evidence: high.**
+- Contextual permissions with graceful denial and account-free core. **Evidence: high.**
+- Add a release accessibility matrix covering screen reader, 200%+ text, dark/light contrast, non-color status, reduced motion, focus order and touch targets before claiming store support. **Evidence: high.**
+- Backup/recovery UI should eventually expose backup state + last success + explicit recovery/export while local writes remain authoritative. **Evidence: medium-high.**
+- ADS_POLICY unchanged; pricing/package remains unresolved. **Evidence for new ad placement: insufficient.**
 
 ---
