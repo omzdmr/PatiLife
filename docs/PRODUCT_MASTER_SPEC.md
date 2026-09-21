@@ -64,6 +64,8 @@ The design reference lives at `docs/assets/patilife-design-reference.jpg` when a
 - Vet appointments
 - Feeding/routine reminders
 - Snooze, completion and missed-task recovery
+- Care occurrences use explicit `due / completed / skipped / missed` states; completion keeps timestamp and actor attribution so solo history can later support household coordination without a schema rewrite.
+- Dismissing or missing a notification must not silently count as task completion. Unresolved overdue occurrences remain recoverable from Today/history.
 - Notification permissions handled respectfully
 
 ### 5. Diary and memories
@@ -76,7 +78,8 @@ The design reference lives at `docs/assets/patilife-design-reference.jpg` when a
 ### 6. Household and handoff
 Future architecture must leave room for:
 - Shared household access
-- Pet-sitter handoff
+- Durable household member roles and temporary pet-sitter/handoff grants are separate concepts.
+- Pet-sitter/handoff access should be scoped, revocable and time-bounded when remote sharing is implemented; shared passwords are not the handoff model.
 - Emergency card
 - Read-only vet/export share
 - Clear ownership and privacy boundaries
@@ -104,6 +107,8 @@ Future architecture must leave room for:
 - Persistent data layer must be migration-safe.
 - Feature work should aim for vertical slices: model -> persistence -> service/state -> UI -> accessibility -> tests.
 - Avoid speculative backend dependencies for features that can work locally.
+- The local database is the authoritative core record. Optional backup/sync/collaboration may extend it, but must not make an account or network connection necessary to read and edit core records.
+- User-owned records must have an exit path: plan a human-readable per-pet/date-range PDF and a machine-readable full-data export. Export must not become inaccessible merely because a paid plan expires.
 
 ## Monetization / ads
 PatiLife may add ads later, so placement abstractions should be designed early without forcing a production ad SDK now.
@@ -116,6 +121,7 @@ Forbidden ad locations:
 - Emergency information
 - Destructive confirmation flows
 - Any screen where an ad can be confused with a care action
+- Reminder completion, care logging, export or data-recovery actions
 
 Possible low-friction placements for the free tier:
 - A clearly labeled low-profile native/banner slot after the Today task section
@@ -126,6 +132,7 @@ Rules:
 - No routine-navigation interstitials.
 - No deceptive styling or accidental-tap placement.
 - No ads that break accessibility or obscure pet-care information.
+- No monetization state may make existing local care records unreadable or block the user's data export.
 - Research findings about ad annoyance should update this policy.
 
 ## Quality bar
@@ -155,6 +162,13 @@ A feature is not “done” merely because a screen exists. For significant feat
 
 This roadmap is directional, not an excuse to ignore strong research evidence. Research handoffs should be evaluated, accepted/rejected explicitly, and folded into this spec when warranted.
 
+## Research-accepted constraints — 2026-09-22
+Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md` and `research/2026-09-22-0307-shared-care-trust.md`.
+- Reminder/care data is modeled as recoverable occurrences with status, actor and timestamp; notifications are a delivery mechanism, not the source of truth.
+- Core local records stay account-free/offline-capable. Optional sync or household collaboration cannot become the only copy or the only way to access core data.
+- Data portability is a trust requirement: PDF handoff plus machine-readable export are planned capabilities, and existing user data is never held hostage to subscription state.
+- Household membership and temporary sitter handoff require different permission/lifecycle semantics.
+- The approved compact four-tab product shell remains the default response to feature growth; research does not justify a module-grid redesign.
 
 ## Localization contract
 
