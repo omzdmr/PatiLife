@@ -60,46 +60,62 @@ This is the permanent research memory for PatiLife. Detailed source snapshots li
 ### 2026-09-22 06:05 +08 — Onboarding, accessibility, local-first recovery trust and monetization
 **Detailed snapshot:** `research/2026-09-22-0605-onboarding-accessibility-trust.md`
 
-**Scope:** first-run friction/time-to-value, accessibility and large-text/dark-mode completion, account/backup trust, monetization boundaries. Market rotation: English/global plus French/German competitor listings and Japanese Apple platform guidance.
+**Accepted findings**
+- First value should precede complete profile setup; nonessential profile fields, account, paywall and broad permission prompts come later/contextually.
+- Accessibility needs a common-task release matrix across screen reader, 200%+ text, contrast, non-color state, reduced motion, focus and touch targets.
+- FR/DE competitors strengthen local-first/no-account positioning; future backup UX should expose configured state, last successful backup and recovery/export while local writes remain authoritative.
+- No evidence justified expanding ad surfaces or choosing a pricing model.
+
+**Evidence strength:** high for progressive onboarding/contextual permissions/accessibility; medium-high for backup-state UX; pricing remains unresolved.
+
+---
+
+### 2026-09-22 07:25 +08 — Medication safety, vaccine provenance, vet-visit continuity and document handoff
+**Detailed snapshot:** `research/2026-09-22-0725-medication-records-vet-visit.md`
+
+**Scope:** medication/vaccine/parasite adherence; conditions/labs/document provenance; vet appointment before/after continuity; health-flow monetization. Market rotation: English/global plus French, Turkish and Japanese product surfaces.
 
 **Key sources (accessed 2026-09-22):**
-- Apple Accessibility Nutrition Labels: https://developer.apple.com/help/app-store-connect/manage-app-accessibility/overview-of-accessibility-nutrition-labels
-- Apple Japanese accessibility guidance: https://developer.apple.com/jp/help/app-store-connect/manage-app-accessibility/overview-of-accessibility-nutrition-labels
-- Apple Sign in with Apple HIG: https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple/
-- Android accessibility: https://developer.android.com/guide/topics/ui/accessibility/apps
-- Android/Google Play accessibility testing: https://developer.android.com/guide/topics/ui/accessibility/testing
-- PokiPaw current listing/changelog: https://apps.apple.com/us/app/pokipaw-pet-health-tracker/id6761670616
-- PetPal AI+ current listing/changelog: https://apps.apple.com/us/app/petpal-ai/id6759816292
-- Awwdit accessibility declarations: https://apps.apple.com/us/app/pet-care-tracker-awwdit/id6746352479
+- FDA Veterinary Medication Errors: https://www.fda.gov/animal-veterinary/product-safety-information/veterinary-medication-errors
+- FDA medication questions for pet owners: https://www.fda.gov/animal-veterinary/animal-health-literacy/medications-your-pet-questions-your-vet
+- AAHA feline vaccine permanent-record guidance: https://www.aaha.org/resources/2020-aahaaafp-feline-vaccination-guidelines/adverse-postvaccination-reactions/
+- KibblRx: https://apps.apple.com/us/app/kibblrx/id6760588981
+- Remewdy: https://apps.apple.com/us/app/remewdy-pet-med-tracker/id6761487030
+- PetDose: https://apps.apple.com/us/app/petdose-pet-med-reminders/id6758732979
+- Pet Pill: https://apps.apple.com/us/app/pet-pill-dog-cat-care-app/id6760020801
 - Whispet FR: https://apps.apple.com/fr/app/whispet-sant%C3%A9-soins/id6760017949
-- FurFamily FR: https://apps.apple.com/fr/app/furfamily-carnet-sant%C3%A9-animal/id6764331745
-- Pilou FR: https://apps.apple.com/fr/app/pilou-carnet-de-sant%C3%A9-animal/id6803716462
-- Pfotentagebuch DE: https://apps.apple.com/de/app/pfotentagebuch-haustier-app/id6800088082
-- Pet Health+ DE: https://apps.apple.com/de/app/pet-health-vaccine-tracker/id6737129774
-- Snout discussion (2026-09-14): https://www.reddit.com/r/iOSAppsMarketing/comments/1wg2kma/
-- PawProof discussion (2026-06-15): https://www.reddit.com/r/apps/comments/1u6wddb/
-- Pet-manager discussion (2026-03-30): https://www.reddit.com/r/AppIdeas/comments/1s7ixtn/
+- Muzzly FR: https://apps.apple.com/fr/app/muzzly-m%C3%A9dicaments-rappels/id6761260557
+- Furo TR: https://apps.apple.com/tr/app/furo-evcil-hayvan-takibi/id6775974424
+- PokiPaw JP: https://apps.apple.com/jp/app/pokipaw-%E3%83%9A%E3%83%83%E3%83%88%E5%81%A5%E5%BA%B7%E7%AE%A1%E7%90%86-%E7%8A%AC%E7%8C%AB%E3%81%8A%E4%B8%96%E8%A9%98%E9%8C%B2%E6%89%8B%E5%B8%B3/id6761670616
+- CovePet: https://covepet.com/
+- Petio vet-visit notes, 2026-09-01: https://www.petiogo.com/blog/vet-visit-notes-template
+- FamilyPet+ discussion, 2026-06-29: https://www.reddit.com/r/SideProject/comments/1uixmy3/
+- PawProof discussion, 2026-06-29: https://www.reddit.com/r/apps/comments/1uitubn/
+- VetKeeper discussion, 2026-09-17: https://www.reddit.com/r/SideProject/comments/1wivu2g/
 
 **Repeated findings**
-- First value should precede complete profile setup. Current competitors explicitly shorten onboarding, allow guest/no-account use, or reduce typing; platform guidance supports delaying sign-in and optional data collection.
-- PatiLife's first-run minimum should be enough to create a coherent local pet record and enter the shell; breed/birthday/sex/microchip/vet/insurance/history/documents can be progressively completed later. Unknown remains valid.
-- Permission requests should be contextual. Do not front-load notification/photo/account/paywall prompts before the user sees why they help.
-- Accessibility is now store-visible product information on Apple platforms. Apple expects common tasks to work for declared capabilities; Google Play pre-launch testing audits touch targets, contrast, labels and accessibility implementation.
-- PatiLife therefore needs a common-task accessibility release matrix, not scattered semantics checks: pet creation/switching, quick log, medication/reminder recovery, health record, Diary retrieval, Profile/Emergency Card, document/export.
-- FR/DE competitors repeatedly position no-account/offline/device-private storage as a benefit. Existing local-first direction is strengthened. A useful future backup UX should show configured state and last successful backup/recovery without making local logging depend on sync.
-- Monetization models remain heterogeneous (subscription, lifetime, free-one-pet, premium export/multi-pet, no-ads). No evidence justifies expanding PatiLife ad surfaces or choosing a pricing model yet.
+- Medication definition and individual dose occurrences are different records. Current apps repeatedly need one-time, multi-time/day, every-other-day/every-N-day and PRN schedules; Remewdy's current changelog documents real bugs from retroactive occurrence generation and prematurely marking future doses skipped.
+- FDA safety material supports preserving drug name/strength/form/route/instructions and a current list of prescription + OTC + supplements. PatiLife should store professional instructions, not invent universal missed-dose advice.
+- Refill/supply tracking recurs across medication-focused competitors and solves a different failure from adherence. Keep it optional and correction-friendly inside medication rather than create an inventory module.
+- AAHA's permanent vaccine record is substantially richer than name/date: product/manufacturer, serial/lot, expiry, administrator, route/site and adverse events can matter. PatiLife should expose these as progressive optional provenance fields while keeping the fast path small.
+- Vet visits work better as one durable timeline event with pre-visit reason/questions/current context and post-visit instructions, documents, medication changes and follow-up tasks, instead of disconnected appointment/note/document silos.
+- Document scanning/import is useful mainly as friction reduction. Original source attachment stays canonical; OCR/extraction must be reviewable and source-linked.
+- No new safe ad surface emerged. Health records, medication/vaccine, vet visits, documents and handoff remain trust-heavy and uninterrupted.
 
 **Contradictions / uncertainty**
-- Many current pet apps are young with sparse reviews; feature/paywall choices are market signals, not satisfaction proof.
-- Developer launch posts are not independent validation and were used only for architecture/positioning context.
-- iCloud-only patterns do not solve Android parity; cross-platform backup provider/merge behavior still needs technical research.
-- This run found insufficient independent current Korean/Chinese/Turkish review evidence for a new market-specific requirement; none was invented.
+- Many 2026 medication apps have sparse independent reviews; feature convergence is competitive evidence, not satisfaction proof.
+- FDA/AAHA detail is authoritative but U.S.-centric; detailed provenance fields should not become mandatory worldwide.
+- Vaccine schedules depend on product/species/age/risk/region/veterinarian; evidence argues against a universal hard-coded booster calculator.
+- Refill forecasting has repeated competitor support but limited independent user-review volume; keep optional.
+- Turkish/French/Japanese current listings did not provide enough independent complaint volume to justify locale-specific health schemas.
 
 **RESEARCH HANDOFF**
-- First-run: minimum pet identity -> usable Today/Profile -> progressive completion; no account/paywall/permission burst before first value. **Evidence: high.**
-- Contextual permissions with graceful denial and account-free core. **Evidence: high.**
-- Add a release accessibility matrix covering screen reader, 200%+ text, dark/light contrast, non-color status, reduced motion, focus order and touch targets before claiming store support. **Evidence: high.**
-- Backup/recovery UI should eventually expose backup state + last success + explicit recovery/export while local writes remain authoritative. **Evidence: medium-high.**
-- ADS_POLICY unchanged; pricing/package remains unresolved. **Evidence for new ad placement: insufficient.**
+- Separate medication definition/schedule from editable dose occurrences; enforce effective start/end so schedule edits do not create phantom historical misses. **Evidence: high.**
+- Support a compact recurrence core: one-time, fixed times/day, selected weekdays/every-N-days and PRN; richer cycles can remain later. **Evidence: high.**
+- Preserve optional medication safety/provenance fields and source prescription/label; record vet-provided missed-dose/storage/food instructions rather than generating medical advice. **Evidence: high.**
+- Add optional, correction-friendly supply/refill tracking inside medication. **Evidence: medium-high.**
+- Vaccine UI uses progressive disclosure: core given/next-due plus optional manufacturer/lot/expiry/clinic/route/site/source document; no universal auto-protocol. **Evidence: high.**
+- Model vet appointment/consultation as one durable visit event spanning preparation -> actual visit -> documents/instructions -> follow-up. **Evidence: medium-high.**
+- ADS_POLICY unchanged; pricing/package unresolved. **Evidence for new ad placement: insufficient.**
 
 ---
