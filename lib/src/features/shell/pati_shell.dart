@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patilife/l10n/generated/app_localizations.dart';
 import '../diary/diary_screen.dart';
 import '../health/health_screen.dart';
 import '../home/home_screen.dart';
@@ -22,51 +23,42 @@ class _PatiShellState extends State<PatiShell> {
   ];
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: SafeArea(
-          bottom: false,
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 180),
-            switchInCurve: Curves.easeOutCubic,
-            switchOutCurve: Curves.easeOutCubic,
-            transitionBuilder: (child, animation) => FadeTransition(
-              opacity: animation,
-              child: child,
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        child: IndexedStack(index: index, children: pages),
+      ),
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: NavigationBar(
+          selectedIndex: index,
+          onDestinationSelected: (value) => setState(() => index = value),
+          destinations: [
+            NavigationDestination(
+              icon: const Icon(Icons.home_outlined),
+              selectedIcon: const Icon(Icons.home_rounded),
+              label: l10n.navToday,
             ),
-            child: KeyedSubtree(
-              key: ValueKey(index),
-              child: pages[index],
+            NavigationDestination(
+              icon: const Icon(Icons.favorite_border_rounded),
+              selectedIcon: const Icon(Icons.favorite_rounded),
+              label: l10n.navHealth,
             ),
-          ),
+            NavigationDestination(
+              icon: const Icon(Icons.auto_stories_outlined),
+              selectedIcon: const Icon(Icons.auto_stories_rounded),
+              label: l10n.navDiary,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.pets_outlined),
+              selectedIcon: const Icon(Icons.pets_rounded),
+              label: l10n.navProfile,
+            ),
+          ],
         ),
-        bottomNavigationBar: SafeArea(
-          top: false,
-          child: NavigationBar(
-            selectedIndex: index,
-            onDestinationSelected: (value) => setState(() => index = value),
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.home_outlined),
-                selectedIcon: Icon(Icons.home_rounded),
-                label: 'Bugün',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.favorite_border_rounded),
-                selectedIcon: Icon(Icons.favorite_rounded),
-                label: 'Sağlık',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.auto_stories_outlined),
-                selectedIcon: Icon(Icons.auto_stories_rounded),
-                label: 'Günlük',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.pets_outlined),
-                selectedIcon: Icon(Icons.pets_rounded),
-                label: 'Profil',
-              ),
-            ],
-          ),
-        ),
-      );
+      ),
+    );
+  }
 }

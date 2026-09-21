@@ -1,53 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:patilife/l10n/generated/app_localizations.dart';
 import 'package:patilife/src/app.dart';
 import 'package:patilife/src/design/pati_theme.dart';
 import 'package:patilife/src/features/onboarding/onboarding_screen.dart';
 
 void main() {
-  testWidgets('core shell exposes four primary destinations', (tester) async {
+  setUp(() {
+    TestWidgetsFlutterBinding.ensureInitialized()
+        .platformDispatcher
+        .localeTestValue = const Locale('en');
+  });
+
+  tearDown(() {
+    TestWidgetsFlutterBinding.ensureInitialized()
+        .platformDispatcher
+        .clearLocaleTestValue();
+  });
+
+  test('launch localization set contains exactly ten locales', () {
+    final tags = AppLocalizations.supportedLocales
+        .map((locale) => locale.toLanguageTag())
+        .toSet();
+
+    expect(tags.length, 10);
+    expect(
+      tags,
+      containsAll(<String>{
+        'en',
+        'tr',
+        'es-419',
+        'pt-BR',
+        'zh-CN',
+        'hi',
+        'id',
+        'ja',
+        'de',
+        'fr',
+      }),
+    );
+  });
+
+  testWidgets('core shell localizes primary destinations', (tester) async {
     await tester.pumpWidget(const PatiLifeApp());
 
-    expect(find.text('Bugün'), findsWidgets);
-    expect(find.text('Sağlık'), findsOneWidget);
-    expect(find.text('Günlük'), findsOneWidget);
-    expect(find.text('Profil'), findsOneWidget);
+    expect(find.text('Today'), findsWidgets);
+    expect(find.text('Health'), findsOneWidget);
+    expect(find.text('Diary'), findsOneWidget);
+    expect(find.text('Profile'), findsOneWidget);
     expect(find.text('Misket'), findsWidgets);
   });
 
-  testWidgets('weight quick action opens a one-sheet logging flow',
+  testWidgets('weight quick action opens localized one-sheet flow',
       (tester) async {
     await tester.pumpWidget(const PatiLifeApp());
 
-    await tester.tap(find.text('Kilo').first);
+    await tester.tap(find.text('Weight').first);
     await tester.pumpAndSettle();
 
-    expect(find.text('Kilo kaydet'), findsOneWidget);
-    expect(find.text('Bugün · Şimdi'), findsOneWidget);
-    expect(find.text('Kaydet'), findsOneWidget);
+    expect(find.text('Log Weight'), findsOneWidget);
+    expect(find.text('Today · Now'), findsOneWidget);
+    expect(find.text('Save'), findsOneWidget);
   });
 
-  testWidgets('health and profile retain premium shell content',
+  testWidgets('health and profile localize visible shell content',
       (tester) async {
     await tester.pumpWidget(const PatiLifeApp());
 
-    await tester.tap(find.text('Sağlık').last);
+    await tester.tap(find.text('Health').last);
     await tester.pumpAndSettle();
-    expect(find.text('Kilo eğilimi'), findsOneWidget);
-    expect(find.text('Bakım planı'), findsOneWidget);
+    expect(find.text('Weight trend'), findsOneWidget);
+    expect(find.text('Care plan'), findsOneWidget);
 
-    await tester.tap(find.text('Profil').last);
+    await tester.tap(find.text('Profile').last);
     await tester.pumpAndSettle();
-    expect(find.text('Hakkında'), findsOneWidget);
-    expect(find.textContaining('642 gündür'), findsOneWidget);
+    expect(find.text('About'), findsOneWidget);
+    expect(find.textContaining('642 days'), findsOneWidget);
   });
 
-  testWidgets('onboarding uses species cards and gates continue',
+  testWidgets('Japanese onboarding is rendered from ARB resources',
       (tester) async {
     var finished = false;
 
     await tester.pumpWidget(
       MaterialApp(
+        locale: const Locale('ja'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         theme: PatiTheme.light(),
         home: OnboardingScreen(
           onFinished: () => finished = true,
@@ -55,15 +94,15 @@ void main() {
       ),
     );
 
-    expect(find.text('Onlar da aile.'), findsOneWidget);
+    expect(find.text('この子たちも家族です。'), findsOneWidget);
     final continueButton = tester.widget<FilledButton>(
-      find.widgetWithText(FilledButton, 'Devam et'),
+      find.widgetWithText(FilledButton, '続ける'),
     );
     expect(continueButton.onPressed, isNull);
 
-    await tester.tap(find.text('Kedi'));
+    await tester.tap(find.text('猫'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Devam et'));
+    await tester.tap(find.text('続ける'));
     expect(finished, isTrue);
   });
 }
