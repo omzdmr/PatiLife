@@ -40,142 +40,143 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       body: SafeArea(
         child: LayoutBuilder(
-          builder: (context, constraints) => SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(
-              PatiSpace.lg,
-              PatiSpace.md,
-              PatiSpace.lg,
-              PatiSpace.lg,
-            ),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight - PatiSpace.xl,
+          builder: (context, constraints) {
+            final compact = constraints.maxHeight < 720;
+            final heroHeight = compact ? 190.0 : 250.0;
+            final sectionGap = compact ? PatiSpace.lg : PatiSpace.xl;
+
+            return SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(
+                PatiSpace.lg,
+                PatiSpace.md,
+                PatiSpace.lg,
+                PatiSpace.lg,
               ),
-              child: IntrinsicHeight(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
                           l10n.appTitle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                 color: PatiColors.sageDeep,
                                 fontWeight: FontWeight.w900,
                               ),
                         ),
-                        const Spacer(),
-                        TextButton(
-                          onPressed: widget.onFinished,
-                          child: Text(l10n.onboardingSkip),
+                      ),
+                      const SizedBox(width: PatiSpace.sm),
+                      TextButton(
+                        onPressed: widget.onFinished,
+                        child: Text(l10n.onboardingSkip),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: compact ? PatiSpace.md : PatiSpace.lg),
+                  SizedBox(
+                    height: heroHeight,
+                    child: PetPhotoSurface(
+                      semanticLabel: l10n.welcomeGraphicSemantic,
+                    ),
+                  ),
+                  SizedBox(height: sectionGap),
+                  Text(
+                    l10n.onboardingHeadline,
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const SizedBox(height: 9),
+                  Text(
+                    l10n.onboardingSubtitle,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w500,
                         ),
-                      ],
+                  ),
+                  SizedBox(height: sectionGap),
+                  Text(
+                    l10n.onboardingQuestion,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: PatiSpace.md),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      mainAxisExtent: 72,
                     ),
-                    const SizedBox(height: PatiSpace.lg),
-                    SizedBox(
-                      height: 250,
-                      child: PetPhotoSurface(
-                        semanticLabel: l10n.welcomeGraphicSemantic,
-                      ),
-                    ),
-                    const SizedBox(height: PatiSpace.xl),
-                    Text(
-                      l10n.onboardingHeadline,
-                      style: Theme.of(context).textTheme.displaySmall,
-                    ),
-                    const SizedBox(height: 9),
-                    Text(
-                      l10n.onboardingSubtitle,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w500,
-                          ),
-                    ),
-                    const SizedBox(height: PatiSpace.xl),
-                    Text(
-                      l10n.onboardingQuestion,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: PatiSpace.md),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 2.15,
-                      ),
-                      itemCount: _Species.values.length,
-                      itemBuilder: (context, index) {
-                        final option = _Species.values[index];
-                        final selected = species == option;
-                        final label = _label(l10n, option);
-                        return Semantics(
-                          button: true,
-                          selected: selected,
-                          label: label,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(PatiRadius.medium),
-                            onTap: () => setState(() => species = option),
-                            child: AnimatedContainer(
-                              duration: PatiMotion.quick,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              decoration: BoxDecoration(
+                    itemCount: _Species.values.length,
+                    itemBuilder: (context, index) {
+                      final option = _Species.values[index];
+                      final selected = species == option;
+                      final label = _label(l10n, option);
+                      return Semantics(
+                        button: true,
+                        selected: selected,
+                        label: label,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(PatiRadius.medium),
+                          onTap: () => setState(() => species = option),
+                          child: AnimatedContainer(
+                            duration: PatiMotion.quick,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            decoration: BoxDecoration(
+                              color: selected
+                                  ? PatiColors.sage.withValues(alpha: .14)
+                                  : Theme.of(context).colorScheme.surface,
+                              border: Border.all(
                                 color: selected
-                                    ? PatiColors.sage.withValues(alpha: .14)
-                                    : Theme.of(context).colorScheme.surface,
-                                border: Border.all(
+                                    ? PatiColors.sage
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .outlineVariant,
+                                width: selected ? 1.4 : 1,
+                              ),
+                              borderRadius:
+                                  BorderRadius.circular(PatiRadius.medium),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  icons[option],
                                   color: selected
-                                      ? PatiColors.sage
+                                      ? PatiColors.sageDeep
                                       : Theme.of(context)
                                           .colorScheme
-                                          .outlineVariant,
-                                  width: selected ? 1.4 : 1,
+                                          .onSurfaceVariant,
                                 ),
-                                borderRadius:
-                                    BorderRadius.circular(PatiRadius.medium),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    icons[option],
-                                    color: selected
-                                        ? PatiColors.sageDeep
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .onSurfaceVariant,
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Text(
+                                    label,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
                                   ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: Text(
-                                      label,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style:
-                                          Theme.of(context).textTheme.labelLarge,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        );
-                      },
-                    ),
-                    const Spacer(),
-                    const SizedBox(height: PatiSpace.xl),
-                    FilledButton(
-                      onPressed: species == null ? null : widget.onFinished,
-                      child: Text(l10n.continueAction),
-                    ),
-                  ],
-                ),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: sectionGap),
+                  FilledButton(
+                    onPressed: species == null ? null : widget.onFinished,
+                    child: Text(l10n.continueAction),
+                  ),
+                ],
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );
