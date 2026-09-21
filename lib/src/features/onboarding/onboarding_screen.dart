@@ -42,9 +42,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final compact = constraints.maxHeight < 720 || textScale >= 1.6;
+            final stackHeader = textScale >= 1.6 || constraints.maxWidth < 360;
             final heroHeight = compact ? 180.0 : 250.0;
             final sectionGap = compact ? PatiSpace.lg : PatiSpace.xl;
-            final cardWidth = (constraints.maxWidth - PatiSpace.lg * 2 - 10) / 2;
+            final availableWidth = constraints.maxWidth - PatiSpace.lg * 2;
+            final twoColumnCards = availableWidth >= 300;
+            final cardWidth = twoColumnCards
+                ? (availableWidth - 10) / 2
+                : availableWidth;
+
+            final brand = Text(
+              l10n.appTitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: PatiColors.sageDeep,
+                    fontWeight: FontWeight.w900,
+                  ),
+            );
+            final skip = TextButton(
+              onPressed: widget.onFinished,
+              child: Text(l10n.onboardingSkip),
+            );
 
             return SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(
@@ -56,26 +75,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          l10n.appTitle,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: PatiColors.sageDeep,
-                                fontWeight: FontWeight.w900,
-                              ),
-                        ),
-                      ),
-                      const SizedBox(width: PatiSpace.sm),
-                      TextButton(
-                        onPressed: widget.onFinished,
-                        child: Text(l10n.onboardingSkip),
-                      ),
-                    ],
-                  ),
+                  if (stackHeader) ...[
+                    brand,
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: skip,
+                    ),
+                  ] else
+                    Row(
+                      children: [
+                        Expanded(child: brand),
+                        const SizedBox(width: PatiSpace.sm),
+                        skip,
+                      ],
+                    ),
                   SizedBox(height: compact ? PatiSpace.md : PatiSpace.lg),
                   SizedBox(
                     height: heroHeight,
