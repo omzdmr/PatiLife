@@ -55,7 +55,9 @@ void main() {
       (tester) async {
     await tester.pumpWidget(const PatiLifeApp());
 
-    await tester.tap(find.text('Weight').first);
+    final weightAction = find.text('Weight').first;
+    await tester.ensureVisible(weightAction);
+    await tester.tap(weightAction);
     await tester.pumpAndSettle();
 
     expect(find.text('Log Weight'), findsOneWidget);
@@ -78,7 +80,7 @@ void main() {
     expect(find.textContaining('642 days'), findsOneWidget);
   });
 
-  testWidgets('Japanese onboarding is rendered from ARB resources',
+  testWidgets('Japanese onboarding is responsive and rendered from ARB resources',
       (tester) async {
     var finished = false;
 
@@ -95,14 +97,17 @@ void main() {
     );
 
     expect(find.text('この子たちも家族です。'), findsOneWidget);
-    final continueButton = tester.widget<FilledButton>(
-      find.widgetWithText(FilledButton, '続ける'),
-    );
+    final continueFinder = find.widgetWithText(FilledButton, '続ける');
+    final continueButton = tester.widget<FilledButton>(continueFinder);
     expect(continueButton.onPressed, isNull);
 
-    await tester.tap(find.text('猫'));
+    final cat = find.text('猫');
+    await tester.ensureVisible(cat);
+    await tester.tap(cat);
     await tester.pumpAndSettle();
-    await tester.tap(find.text('続ける'));
+
+    await tester.ensureVisible(continueFinder);
+    await tester.tap(continueFinder);
     expect(finished, isTrue);
   });
 }
