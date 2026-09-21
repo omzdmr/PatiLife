@@ -1,100 +1,88 @@
 # PatiLife Product Research Log
 
-This is the permanent research memory for PatiLife.
+This is the permanent research memory for PatiLife. Detailed source snapshots live under `research/`; this log is the rolling decision/index layer so recurring runs do not rediscover the same evidence.
 
 ## Rules for research runs
-- Search for real user pain, praise and unmet needs in pet-care / pet-health / pet-tracker products.
-- Prefer repeated patterns across multiple independent sources over a single loud opinion.
-- Include App Store / Google Play reviews when accessible, Reddit/community discussions, competitor support/changelogs and official product documentation.
-- Record source links and date.
-- Separate evidence from interpretation.
-- Do not repeat the same finding every hour unless new evidence materially strengthens or contradicts it.
-- Explicitly research ad annoyance, paywall friction, privacy/account complaints, notification reliability, data loss/export, multi-pet support and cross-device expectations.
-- Research both Android and iOS expectations.
-- When a finding is strong enough to change product requirements, add a short **RESEARCH HANDOFF** section and update PRODUCT_MASTER_SPEC only when justified.
-
-## Entry format
-### YYYY-MM-DD HH:mm — Topic
-**Sources:** links
-
-**Repeated findings**
-- ...
-
-**Contradictions / uncertainty**
-- ...
-
-**What this means for PatiLife**
-- ...
-
-**RESEARCH HANDOFF**
-- Proposed requirement:
-- Evidence strength:
-- Suggested implementation priority:
-- Risks / what not to over-interpret:
+- Prefer repeated patterns across independent sources over a single loud opinion.
+- Include store reviews/listings, communities, competitor support/changelogs and authoritative platform/veterinary sources where relevant.
+- Record source links/date and separate evidence from interpretation.
+- Do not repeat a finding unless new evidence materially strengthens, narrows or contradicts it.
+- Track ad/paywall friction, privacy/account complaints, notification reliability, data loss/export, multi-pet/cross-device expectations and accessibility.
+- When evidence changes product requirements, add a **RESEARCH HANDOFF** and update `PRODUCT_MASTER_SPEC.md` only when justified.
 
 ---
 
 ### 2026-09-22 03:07 +08 — Shared care, reminder recovery, data ownership and monetization trust
+**Detailed snapshot:** `research/2026-09-22-0307-shared-care-trust.md`
 
-**Scope:** multi-pet/household coordination; family and sitter handoff; offline/local-first backup/export; medication/reminder reliability and missed-task recovery; ad/paywall tolerance. Market spot checks included English/global, Japanese, German, French and Turkish surfaces. This was the first external research entry, so no prior finding was duplicated.
+**Accepted findings**
+- Shared care is coordination, not merely profile sharing: care occurrences need status, actor and timestamp to avoid missed/double care.
+- Household membership and temporary sitter handoff are distinct permission/lifecycle problems.
+- Local-first/no-account core plus optional sync/backup best matches trust and offline needs; PDF + machine-readable export are data-ownership capabilities.
+- Notifications are delivery, not source-of-truth; due/completed/skipped/missed occurrences and overdue recovery are required.
+- Feature breadth does not justify dashboard/module sprawl; approved four-tab compact shell remains the constraint.
+- Routine-navigation, health/logging, reminder-completion and export interstitials remain excluded. Core records/export cannot be held hostage to subscription state.
+
+**Evidence strength:** high for occurrence model, local-first portability and compact-shell direction; medium-high for household-vs-sitter lifecycle; pricing boundary remains unresolved.
+
+---
+
+### 2026-09-22 04:24 +08 — Daily care, life-stage monitoring, timeline retrieval and routine-care monetization
+**Detailed snapshot:** `research/2026-09-22-0424-daily-care-life-stage-timeline.md`
+
+**Scope:** feeding/water, litter/toilet, walks/activity, grooming, sleep/routines; puppy/kitten growth; senior/chronic care; diary/timeline search and reports; ad/paywall behavior. Market rotation emphasized English/global, Simplified Chinese, Japanese and German.
 
 **Sources (accessed 2026-09-22):**
-- Bean — shared household status, local-first/no-account first pet, offline logging, free export, cancellation behavior: https://bean.pet/
-- Notepet — multi-pet medication use, family roles, stock tracking, cloud backup/sync: https://notepet.io/
-- DosePaw — offline, family/sitters, encrypted sync, vet-ready PDF: https://www.dosepaw.com/
-- Remewdy — local-only core, sitter link, family sync, free CSV/JSON export, lifetime option: https://remewdy.com/
-- Burrow — missed-dose alert, caregiver link, adherence history, PDF export: https://www.getburrow.app/
-- PetDiary App Store — medication schedules, taken/skipped history, forgotten-dose nudge, PDF/CSV export: https://apps.apple.com/us/app/petdiary-pet-health-tracker/id6770299811
-- PetPill App Store — catch-up on unlogged doses, household sharing, widgets, local/iCloud model: https://apps.apple.com/us/app/pet-pill-dog-cat-health-care/id6760020801
-- PillPaw App Store — persistent reminders, household attribution, refill/waste tracking, PDF: https://apps.apple.com/us/app/pillpaw/id6787207498
-- PawDose App Store — local/no-account/no-ads, care team, quiet hours, PDF/calendar export, lifetime purchase: https://apps.apple.com/us/app/pet-medication-tracker-pawdose/id6760734157
-- Everkin App Store — expiring sitter access, family sharing, PDF/CSV export, Dynamic Type: https://apps.apple.com/gb/app/everkin-pet-health-tracker/id6751292489
-- Petfetti App Store changelog — user-requested date-range PDF reports and performance work: https://apps.apple.com/us/app/pet-health-tracker-petfetti/id6471319447
-- 11pets App Store / Google Play — broad feature set but navigation complaint in review; current Google Play rating 2.2/5 across ~5.69K reviews, illustrating that breadth alone does not create a trusted product: https://apps.apple.com/us/app/11pets-pet-care/id1232470530 and https://play.google.com/store/apps/details?id=com.m11pets.elevenpets
-- FamilyPet+ Reddit launch/user feedback — household source-of-truth problem; commenter explicitly asks for export/reminders that survive app abandonment and another asks for prescription/vet-note attachments: https://www.reddit.com/r/SideProject/comments/1uixmy3/i_launched_familypet_one_health_tracker_for_every/
-- General medication-app Reddit discussion — offline/no-signup preference and caregiver-count limitation signal: https://www.reddit.com/r/androidapps/comments/1pfx7su/medisafe_no_longer_free_from_2026_best/
-- Apple local notification docs — OS can deliver scheduled local notifications when app is not running; pending requests can be inspected/cancelled: https://developer.apple.com/documentation/usernotifications/scheduling-a-notification-locally-from-your-app
-- Google Play Ads policy — unexpected full-screen interstitials interrupting another intended action are prohibited: https://support.google.com/googleplay/android-developer/answer/9857753
-- Japan: Muzzly JP App Store — persistent reminders, snooze/skip, complex schedules, local/offline core, sitter/family sharing and backup: https://apps.apple.com/jp/app/muzzly-%E3%83%9A%E3%83%83%E3%83%88%E8%96%AC%E7%AE%A1%E7%90%86-%E3%83%AA%E3%83%9E%E3%82%A4%E3%83%B3%E3%83%80%E3%83%BC/id6761260557
-- France: Keia — co-parent sharing, full history, one-time premium; Notes4Pets/Animoo — family sharing, PDF, emergency/sitter card: https://keia.app/fr ; https://notes4pets.app/ ; https://animoo.app/
-- Turkey: PawCal and Petsita — health/reminder/all-in-one positioning; Petsita explicitly advertises free/no-ads: https://pawcal.net/tr ; https://petsita.com/
-- Chinese-language signal: FurNote — food/weight/symptoms/toilet/vet/vaccine/deworming/meds + PDF and multiple-family-member care: https://furnote.io/
+- Pewmino App Store — daily food/water/walk/activity/training/weight/dental/mood timeline: https://apps.apple.com/us/app/pewmino-pet-care-tracker/id6802199574
+- PetMate App Store — feeding/water/litter/weight/photos timeline, multi-pet, optional iCloud: https://apps.apple.com/us/app/petmate-pet-care-log/id6799696225
+- Pet Pawty App Store — detailed elimination + feeding coordination + reports; free report uses rewarded-ad gate: https://apps.apple.com/us/app/pet-pawty/id6755618518
+- PetDeets App Store — flexible care intervals, notification completion, assigned-to-me and explicit offline/sync failure handling: https://apps.apple.com/us/app/petdeets-pet-care-tracker/id6757575327
+- Petfetti App Store changelog — user-requested arbitrary date-range PDF, category or chronological report: https://apps.apple.com/us/app/pet-health-tracker-petfetti/id6471319447
+- CompanAIn App Store — 2026 category filtering + keyword timeline search: https://apps.apple.com/us/app/companain-your-pets-health/id6747678727
+- Pet Health & Vaccine Tracker App Store — Sep 2026 daily notes moved into Records with search/filter; gram precision and VoiceOver graph: https://apps.apple.com/us/app/pet-health-vaccine-tracker/id6737129774
+- Ralph App Store + senior-dog community feedback — structured QoL trends help, but owners still need frictionless behavior/food/med observation notes: https://apps.apple.com/us/app/ralph-pet-quality-of-life/id6480064704 ; https://www.reddit.com/r/seniordogs/comments/1h5zi6y/created_a_free_app_to_help_track_your_dogs/
+- German PetLog — appetite/water, feeding, symptom severity/duration, stool, activity/stress/sleep and vet PDF: https://apps.apple.com/de/app/petlog-haustier-gesundheit/id6747721421
+- German Felova — chronic-care symptom/weight history and one-page vet summary: https://felova.app/de/
+- Chinese local-only 毛孩子 — 4.3 MB, no account/ads; Today + appetite/water/stool/energy/vomit/weight + 7/14/30-day summaries: https://apps.apple.com/cn/app/%E6%AF%9B%E5%AD%A9%E5%AD%90%E5%AE%A0%E7%89%A9%E5%81%A5%E5%BA%B7%E8%AE%B0%E5%BD%95/id6788202619
+- Chinese 毛孩日记 — one-tap feeding/water/elimination/activity/sleep/weight + 7-day trends: https://apps.apple.com/cn/app/%E6%AF%9B%E5%AD%A9%E6%97%A5%E8%AE%B0-%E5%AE%A0%E7%89%A9%E5%81%A5%E5%BA%B7%E8%AE%B0%E5%BD%95-ai%E5%85%BB%E5%AE%A0-%E5%96%82%E9%A3%9F%E9%A5%AE%E6%B0%B4%E6%8E%92%E4%BE%BF%E8%BF%90%E5%8A%A8%E6%89%93%E5%8D%A1/id6779265956
+- Japanese Pawlog — weight/food/elimination/visits + photo diary + PDF: https://apps.apple.com/jp/app/pawlog-%E3%83%9A%E3%83%83%E3%83%88%E5%81%A5%E5%BA%B7%E8%A8%98%E9%8C%B2/id6758423404
+- Japanese Furiend — training/activity/feeding/weight/reminders/growth: https://apps.apple.com/jp/app/%E3%81%B5%E3%82%8A%E3%81%88%E3%82%93%E3%81%A9-%E3%83%9A%E3%83%83%E3%83%88%E5%81%A5%E5%BA%B7%E8%A8%98%E9%8C%B2/id1130176396
+- PetFetch accessibility — VoiceOver/Voice Control/Dynamic Type/non-color state/Reduce Motion: https://petfetch.app/en/accessibility
+- PETKIT Reddit Mar 2026 — paid/subscribed user objects to continued in-app product promotion: https://www.reddit.com/r/PETKIT/comments/1rvcemx/ads_in_paid_app/
+- WSAVA nutritional monitoring — appetite/intake, body weight/condition, GI signs and activity; growing/senior/diseased pets need closer monitoring: https://onlinelibrary.wiley.com/doi/10.1111/j.1748-5827.2011.01079.x
+- AAHA senior care/nutrition + QoL (QoL page updated Dec 16 2025): https://www.aaha.org/resources/2023-aaha-senior-care-guidelines-for-dogs-and-cats/ ; https://www.aaha.org/resources/2023-aaha-senior-care-guidelines-for-dogs-and-cats/nutrition/ ; https://www.aaha.org/resources/how-to-assess-your-senior-pets-quality-of-life/
+- AAHA/AAFP senior-cat elimination: https://www.aaha.org/resources/2021-aaha-aafp-feline-life-stage-guidelines/elimination-senior-cats/
+- WALTHAM puppy/kitten longitudinal growth charts: https://www.waltham.com/resources/puppy-growth-charts ; https://www.waltham.com/resources/kitten-growth-charts
 
 **Repeated findings**
-- Shared care is not merely “share a profile.” The repeated problem is *coordination*: everyone must see whether a task/dose was done, who did it, and when. Bean, Notepet, PillPaw, Muzzly, Everkin and FamilyPet+ converge on this. The safety-sensitive case is avoiding duplicate medication; the mundane equivalent is avoiding duplicate feeding or missed routine care.
-- Sitter handoff is a different permission problem from permanent household membership. Strong implementations use a link or scoped/expiring access instead of asking a sitter to share the owner password or fully join the household. Remewdy and Everkin are particularly explicit here.
-- Data portability is part of trust, not an “advanced export” novelty. PDF is for vets/sitters/humans; CSV/JSON is for ownership/backup/migration. Multiple 2026 competitors advertise export as a trust feature, and a recent FamilyPet+ commenter specifically fears lock-in if the app is abandoned.
-- Local-first reminders are technically compatible with PatiLife’s architecture. Apple explicitly supports OS-scheduled local notifications that can fire while the app is not running. Competitors increasingly advertise offline reminders/logging rather than requiring a server for basic care.
-- A reminder firing is not enough. Products are converging on occurrence states (due/given/skipped/missed), snooze, persistent or follow-up reminders, catch-up for unlogged past doses, and refill/stock warnings. PetDiary’s July 2026 release explicitly added a forgotten-dose nudge; PetPill’s current listing highlights catching up doses nobody logged.
-- “All in one” has demand, but breadth can become a liability. 11pets advertises an unusually broad record set, yet its current Google Play surface is 2.2/5 with ~5.69K reviews and an App Store reviewer describes navigation as difficult. This is not proof of a single cause, but it supports PatiLife’s existing compact-shell rule: add capabilities behind coherent surfaces rather than multiplying dashboards and menus.
-- Ad-free/privacy-first/no-account language is repeatedly used as a differentiator in 2026 pet-care apps. This is partly competitor marketing, not direct satisfaction evidence, so it should not alone ban ads. However, Google’s current policy independently confirms that unexpected interstitials interrupting user actions are unacceptable. PatiLife’s existing prohibition on routine-navigation and health-flow interstitials is strengthened, not weakened.
-- Subscription resistance exists, but willingness to pay is contextual. Current competitors successfully test monthly/annual plans while others prominently sell lifetime purchases or no-subscription positioning. The stronger cross-source principle is: core records, reminders and user-owned data should not become inaccessible when payment stops; premium can reasonably monetize collaboration scale, convenience, richer reports or cloud sync without holding care history hostage.
+- Across English, Chinese, Japanese and German products, the useful daily-care vocabulary converges on feeding/appetite, water/thirst, elimination, activity/walk, weight and short observation/symptom. Grooming/sleep/training matter but are lower-frequency/contextual.
+- Daily tracking is useful only if entry cost stays tiny. The product opportunity is progressive disclosure: normal meal/toilet/walk can be one or two actions; abnormal or medically relevant events can expand to quantity, consistency, severity, photo/video or note.
+- Species/life stage should change suggested quick actions, not create separate data silos or top-level modules. Dog GPS walks and cat litter detail are examples of opt-in depth.
+- Growing pets need longitudinal weight *trajectory*, not a universal ideal-weight number. WALTHAM puppy/kitten charts reinforce that growth rate depends on age/size/sex and is interpreted longitudinally.
+- Senior/chronic care repeatedly needs appetite, hydration/thirst, elimination, mobility/activity, symptoms and trend context. AAHA QoL guidance adds comfort, happiness/social engagement and good-vs-bad-day pattern. These support optional structured check-ins, not a universal diagnostic health score.
+- Long timelines need retrieval. Current 2026 products are adding category filters, keyword search and arbitrary date-range reports. Petfetti explicitly labels date-range reporting user-requested; CompanAIn added category filter then keyword search; another tracker moved notes into the central Records surface and made them searchable.
+- Accessibility is compatible with the premium compact identity: Dynamic Type/large text, screen-reader semantics, non-color-only state and reduced motion should remain completion gates rather than a separate “accessible mode.”
+- No evidence justified a new ad placement. A rewarded-ad gate on a vet/report action is especially mismatched to PatiLife’s portability/trust model; paid users seeing persistent product promotion also produces explicit resentment.
 
 **Contradictions / uncertainty**
-- Most 2026 niche competitors have too few public ratings for statistically useful satisfaction analysis; their feature pages prove product direction, not user approval.
-- Persistent/escalating alerts can help chronic-care adherence but can also become notification spam. PatiLife should not blindly copy “nag until acknowledged” for feeding, grooming or low-risk routines. Escalation must be per-task and opt-in/appropriate to importance.
-- Local-only storage maximizes privacy and offline behavior but creates device-loss risk. Cloud-only sync improves recovery but conflicts with no-account core use. The evidence favors local-first + optional user-controlled backup/sync rather than either extreme.
-- Lifetime pricing gets goodwill in several current apps, but ongoing sync/storage has recurring cost. No pricing requirement is accepted from this research alone.
+- Many current pet apps have sparse ratings; feature convergence is product-direction evidence, not proof of satisfaction.
+- GPS walk recording can be valuable but adds permission, battery and implementation cost. Evidence supports a walk/activity event now, not mandatory first-release GPS maps.
+- Exact water volume is often unknowable in shared-bowl/multi-pet homes. PatiLife should permit approximate/qualitative thirst observations rather than forcing milliliters.
+- AI “health scores” and anomaly claims are increasingly marketed, particularly in Chinese-language products, but independent evidence is not strong enough to make a generic score a requirement.
+- Scientific growth curves are useful, but integrating reference datasets requires source/licensing review. Preserve precise longitudinal measurements now; do not copy a chart dataset blindly.
 
 **What this means for PatiLife**
-- Model care as attributable occurrences from the start: `due / completed / skipped / missed`, completion actor and timestamp. This supports solo use today and safe household sync later without redesigning medication history.
-- Keep account-free local use. Treat optional backup/sync and household collaboration as add-ons to the local record, not prerequisites for seeing or editing core pet data.
-- Plan two distinct sharing modes: household members with durable roles, and sitter/handoff access that is scoped, revocable and preferably expires automatically.
-- Make export a product capability, not an afterthought: readable date-range PDF per pet plus machine-readable full-data export. Export should remain available even if a paid plan expires.
-- Reminder UX should include snooze, skip with optional reason, missed/unconfirmed recovery and a clear “what is overdue?” Today state. Refill/remaining-quantity tracking is valuable for medications but should not bloat the first generic reminder model.
-- Preserve the approved four-tab premium shell. Search, export, documents, sharing and deeper health types should live under coherent existing surfaces rather than spawning a grid of top-level modules.
-- Preserve current ad exclusions. If ads are introduced later, keep them passive and clearly separated after non-critical content; no interstitial may gate navigation, save, logging, reminder completion, export or health access.
+- Keep the approved four-tab shell. Add depth through one shared per-pet event/timeline model, not more dashboards.
+- Quick logging should expose a small common set and use progressive disclosure. Species/life stage and user preference can determine which shortcuts appear.
+- Diary/Health/Today should be different views over durable history rather than unrelated histories. As data grows, support date-range + category + free-text retrieval.
+- Plan optional senior/chronic check-ins and precise puppy/kitten weight history. Disease-specific tools such as glucose curves or seizure timers are later opt-in modules tied to actual care needs.
+- Never require an ad to log care, inspect timeline/trends, generate a vet/export handoff, or access sitter/emergency information.
 
 **RESEARCH HANDOFF**
-- Proposed requirement: Care/reminder occurrences must support due/completed/skipped/missed state, actor attribution and timestamp; missed/unconfirmed occurrences remain recoverable instead of silently disappearing.
-- Evidence strength: **High** — repeated across current pet-specific competitors, App Store changelogs/listings and household-care problem reports; technically aligned with OS-local notification support.
-- Suggested implementation priority: **High, before reminder persistence schema is frozen.** Build the local occurrence model first; collaboration transport can come later.
-- Proposed requirement: Core records must be account-free/local-first and exportable; future household/sync features must not make local records or export inaccessible after subscription expiry.
-- Evidence strength: **High** for portability/local-first trust direction; **medium** for exact free-vs-paid boundary.
-- Suggested implementation priority: **Architecture now; user-facing export at roadmap step 9.**
-- Proposed requirement: Separate durable household roles from scoped sitter handoff; sitter access should be revocable and time-bounded where remote sharing exists.
-- Evidence strength: **Medium-high** — convergent current competitor pattern with a clear real-world permission distinction.
-- Suggested implementation priority: **Design/data-model constraint now; implementation at household/handoff milestone.**
-- Risks / what not to over-interpret: Do not turn PatiLife into a medication-only app, do not add server dependency just to imitate real-time competitors, do not infer that every user wants persistent alerts, and do not change the approved visual system based on competitor feature density.
+- Proposed requirement: common daily-care event vocabulary with optional structured detail; default logging remains 1–2 actions. Suggested shortcuts adapt to species/life stage without creating schema/UI silos. **Evidence: high. Priority: before quick-log persistence schema freezes.**
+- Proposed requirement: one per-pet chronological history supports date-range, event-category and free-text search/filter; report/export reuses the same filtering model. **Evidence: high. Priority: architecture now, retrieval UI when real history exists.**
+- Proposed requirement: preserve precise longitudinal weight measurements and allow optional senior/chronic QoL observations; avoid universal diagnostic health scores. **Evidence: medium-high. Priority: data-model constraint now, specialized UI later.**
+- Proposed requirement: condition-specific trackers (e.g. glucose curve, seizure timer) remain opt-in future modules rather than permanent core dashboard elements. **Evidence: medium.**
+- Monetization handoff: no rewarded/interstitial gate on routine logging, history/trends, vet/export, emergency or sitter surfaces. **Evidence: high for exclusion; no new allowed placement established this run.**
 
 ---
