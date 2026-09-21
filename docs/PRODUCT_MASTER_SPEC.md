@@ -56,6 +56,9 @@ The design reference lives at `docs/assets/patilife-design-reference.jpg` when a
 - Sleep / routine notes where useful
 - Custom recurring care tasks
 - Fast one-tap logging
+- Daily-care events use a shared vocabulary and durable timeline rather than isolated feature histories. Suggested quick actions may adapt to species, life stage and user preference.
+- Progressive disclosure is the default: routine/normal care should usually log in one or two actions; quantity, consistency, severity, media or notes appear only when useful.
+- Water tracking must allow qualitative/approximate observations because exact volume is not always measurable in multi-pet/shared-bowl homes.
 
 ### 4. Reminders
 - Vaccine due dates
@@ -71,7 +74,7 @@ The design reference lives at `docs/assets/patilife-design-reference.jpg` when a
 ### 5. Diary and memories
 - Photo + short note entries
 - Health/care events appear in the timeline
-- Search/filter by pet and event type
+- Long-lived per-pet history supports lightweight date-range, event-category and free-text retrieval as data grows; export/report filtering should reuse the same model.
 - “On this day” and yearly memory summaries are future candidates
 - Diary must remain useful without turning into a social network
 
@@ -89,6 +92,9 @@ Future architecture must leave room for:
 - Feeding/water trends where captured
 - Medication adherence
 - Vaccine schedule status
+- Growing-pet weight history must preserve enough precision for longitudinal growth trajectories; do not reduce puppy/kitten growth to one universal “ideal weight.”
+- Optional senior/chronic observations may cover appetite, hydration/thirst, elimination, mobility/activity, symptoms and quality-of-life context without presenting a generic diagnostic health score as medical truth.
+- Disease-specific tools such as glucose curves or seizure timers are opt-in future condition modules, not permanent dashboard furniture for every pet.
 - Routine streaks only when they are helpful, never guilt-driven
 - Insights must distinguish logged data from medical interpretation
 
@@ -109,6 +115,7 @@ Future architecture must leave room for:
 - Avoid speculative backend dependencies for features that can work locally.
 - The local database is the authoritative core record. Optional backup/sync/collaboration may extend it, but must not make an account or network connection necessary to read and edit core records.
 - User-owned records must have an exit path: plan a human-readable per-pet/date-range PDF and a machine-readable full-data export. Export must not become inaccessible merely because a paid plan expires.
+- Today quick logs, Health records and Diary presentation should project coherent views over durable per-pet history where event semantics overlap, rather than forcing users to reconstruct a story from unrelated silos.
 
 ## Monetization / ads
 PatiLife may add ads later, so placement abstractions should be designed early without forcing a production ad SDK now.
@@ -122,6 +129,7 @@ Forbidden ad locations:
 - Destructive confirmation flows
 - Any screen where an ad can be confused with a care action
 - Reminder completion, care logging, export or data-recovery actions
+- Timeline/history retrieval, health trends and sitter/vet handoff actions must not be gated by rewarded or interstitial ads
 
 Possible low-friction placements for the free tier:
 - A clearly labeled low-profile native/banner slot after the Today task section
@@ -163,12 +171,15 @@ A feature is not “done” merely because a screen exists. For significant feat
 This roadmap is directional, not an excuse to ignore strong research evidence. Research handoffs should be evaluated, accepted/rejected explicitly, and folded into this spec when warranted.
 
 ## Research-accepted constraints — 2026-09-22
-Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md` and `research/2026-09-22-0307-shared-care-trust.md`.
+Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md`, `research/2026-09-22-0307-shared-care-trust.md` and `research/2026-09-22-0424-daily-care-life-stage-timeline.md`.
 - Reminder/care data is modeled as recoverable occurrences with status, actor and timestamp; notifications are a delivery mechanism, not the source of truth.
 - Core local records stay account-free/offline-capable. Optional sync or household collaboration cannot become the only copy or the only way to access core data.
 - Data portability is a trust requirement: PDF handoff plus machine-readable export are planned capabilities, and existing user data is never held hostage to subscription state.
 - Household membership and temporary sitter handoff require different permission/lifecycle semantics.
 - The approved compact four-tab product shell remains the default response to feature growth; research does not justify a module-grid redesign.
+- Daily-care breadth is handled through progressive disclosure and adaptable shortcuts, not giant forms or a top-level module per behavior.
+- Per-pet history is a durable product surface: as records accumulate it must remain retrievable by date range, event category and free text; report/export uses the same filtering semantics.
+- Life-stage depth is optional and contextual: precise growth trajectories and senior/chronic observations are supported without forcing disease-specific tools or generic medical scores onto healthy-pet users.
 
 ## Localization contract
 
