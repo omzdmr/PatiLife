@@ -56,7 +56,15 @@ void main() {
     await tester.pumpWidget(const PatiLifeApp());
 
     final weightAction = find.text('Weight').first;
-    await tester.ensureVisible(weightAction);
+    final pageScroll = find.byType(CustomScrollView).first;
+    await tester.scrollUntilVisible(
+      weightAction,
+      220,
+      scrollable: find.descendant(
+        of: pageScroll,
+        matching: find.byType(Scrollable),
+      ),
+    );
     await tester.tap(weightAction);
     await tester.pumpAndSettle();
 
