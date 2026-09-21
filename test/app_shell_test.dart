@@ -18,12 +18,11 @@ void main() {
         .clearLocaleTestValue();
   });
 
-  test('launch localization set contains exactly ten locales', () {
+  test('generated localizations contain ten launch locales and required fallbacks', () {
     final tags = AppLocalizations.supportedLocales
         .map((locale) => locale.toLanguageTag())
         .toSet();
 
-    expect(tags.length, 10);
     expect(
       tags,
       containsAll(<String>{
@@ -39,6 +38,7 @@ void main() {
         'fr',
       }),
     );
+    expect(tags, containsAll(<String>{'es', 'pt', 'zh'}));
   });
 
   testWidgets('core shell localizes primary destinations', (tester) async {
