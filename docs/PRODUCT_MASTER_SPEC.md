@@ -117,6 +117,8 @@ Future architecture must leave room for:
 - Critical pet-care tasks take visual priority over monetization.
 - Avoid childish paw-print decoration overload.
 - Avoid dashboard clutter and “every metric at once” syndrome.
+- First-run optimizes for time-to-first-real-record: collect only the minimum pet identity needed to make Today/Profile useful, then offer progressive completion for breed, birthday, sex, microchip, vet, insurance, history and documents.
+- Do not front-load account creation, paywall prompts or a burst of permissions before first value. Ask for notification/photo/other permissions contextually when the user invokes the feature that needs them, with graceful denial.
 
 ## Architecture principles
 - Cross-platform code is preferred for shared product behavior.
@@ -129,6 +131,7 @@ Future architecture must leave room for:
 - Today quick logs, Health records and Diary presentation should project coherent views over durable per-pet history where event semantics overlap, rather than forcing users to reconstruct a story from unrelated silos.
 - Medical/legal/insurance source attachments should not be destructively recompressed merely to save space. Generated previews may be optimized separately while the source file remains retrievable.
 - PatiLife may store insurance documents, invoices, EOBs and external claim references, but insurer claim status is not authoritative without an integration. Do not create a fake local claim-status truth.
+- Backup/sync failure must never block local logging. When optional backup exists, the product should be able to communicate whether it is configured, the last successful backup, and an explicit recovery/export path without nagging users who intentionally remain local-only.
 
 ## Monetization / ads
 PatiLife may add ads later, so placement abstractions should be designed early without forcing a production ad SDK now.
@@ -169,6 +172,8 @@ A feature is not “done” merely because a screen exists. For significant feat
 - Tests appropriate to the change
 - Documentation/handoff when behavior or architecture changes
 
+Accessibility release validation should use a common-task matrix rather than isolated spot checks. Before claiming store accessibility support, verify applicable core tasks across VoiceOver/TalkBack, platform large-text/accessibility sizes (including 200%+ where required for Apple's Larger Text label), light/dark contrast, state differentiation without color alone, logical focus order, reduced-motion behavior and platform-appropriate touch targets. Core tasks include first pet creation, pet switching, Today quick logging, medication/reminder completion and recovery, health-record creation, Diary retrieval, Profile/Emergency Card and document/export flows.
+
 ## Roadmap order
 1. Approved design system + navigation shell
 2. Onboarding + real pet creation
@@ -198,6 +203,9 @@ Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md` and the dated snapshots u
 - Microchip reference data should leave room for registry/provider and verification metadata; storing a chip number is not equivalent to registering/updating the chip.
 - Generated travel summaries are convenience records, never represented as official passports/certificates.
 - Insurance value in the core product is durable document organization/provenance, not insurer-specific claim processing.
+- First-run setup is progressive: minimum pet identity reaches a useful local shell before nonessential health/profile enrichment, account prompts, monetization prompts or broad permission requests.
+- Accessibility is a release/store-trust requirement measured against common tasks, not a decorative afterthought or a separate mode.
+- Optional backup/recovery UX must preserve local authority and expose understandable recovery state rather than making sync success a prerequisite for care logging.
 
 ## Localization contract
 
