@@ -75,47 +75,42 @@ This is the permanent research memory for PatiLife. Detailed source snapshots li
 
 **Scope:** medication/vaccine/parasite adherence; conditions/labs/document provenance; vet appointment before/after continuity; health-flow monetization. Market rotation: English/global plus French, Turkish and Japanese product surfaces.
 
-**Key sources (accessed 2026-09-22):**
-- FDA Veterinary Medication Errors: https://www.fda.gov/animal-veterinary/product-safety-information/veterinary-medication-errors
-- FDA medication questions for pet owners: https://www.fda.gov/animal-veterinary/animal-health-literacy/medications-your-pet-questions-your-vet
-- AAHA feline vaccine permanent-record guidance: https://www.aaha.org/resources/2020-aahaaafp-feline-vaccination-guidelines/adverse-postvaccination-reactions/
-- KibblRx: https://apps.apple.com/us/app/kibblrx/id6760588981
-- Remewdy: https://apps.apple.com/us/app/remewdy-pet-med-tracker/id6761487030
-- PetDose: https://apps.apple.com/us/app/petdose-pet-med-reminders/id6758732979
-- Pet Pill: https://apps.apple.com/us/app/pet-pill-dog-cat-care-app/id6760020801
-- Whispet FR: https://apps.apple.com/fr/app/whispet-sant%C3%A9-soins/id6760017949
-- Muzzly FR: https://apps.apple.com/fr/app/muzzly-m%C3%A9dicaments-rappels/id6761260557
-- Furo TR: https://apps.apple.com/tr/app/furo-evcil-hayvan-takibi/id6775974424
-- PokiPaw JP: https://apps.apple.com/jp/app/pokipaw-%E3%83%9A%E3%83%83%E3%83%88%E5%81%A5%E5%BA%B7%E7%AE%A1%E7%90%86-%E7%8A%AC%E7%8C%AB%E3%81%8A%E4%B8%96%E8%A9%98%E9%8C%B2%E6%89%8B%E5%B8%B3/id6761670616
-- CovePet: https://covepet.com/
-- Petio vet-visit notes, 2026-09-01: https://www.petiogo.com/blog/vet-visit-notes-template
-- FamilyPet+ discussion, 2026-06-29: https://www.reddit.com/r/SideProject/comments/1uixmy3/
-- PawProof discussion, 2026-06-29: https://www.reddit.com/r/apps/comments/1uitubn/
-- VetKeeper discussion, 2026-09-17: https://www.reddit.com/r/SideProject/comments/1wivu2g/
+**Accepted findings**
+- Medication definition/schedule and individual dose occurrences are separate records; schedule edits need effective dates and must not create phantom historical misses.
+- Compact recurrence needs one-time, fixed times/day, selected weekdays/every-N-days and PRN; professional instructions/source labels remain canonical rather than app-generated medical advice.
+- Optional supply/refill tracking solves a different failure from adherence and belongs inside medication, not a new inventory module.
+- Vaccine fast entry remains small while optional manufacturer/lot/expiry/clinic/route/site/source-document provenance is preserved.
+- Vet appointment/consultation is one durable visit event spanning preparation, visit, documents/instructions and follow-up.
+- Original health documents remain canonical; OCR/import is reviewable friction reduction.
+- No new safe ad surface or pricing model was justified.
 
-**Repeated findings**
-- Medication definition and individual dose occurrences are different records. Current apps repeatedly need one-time, multi-time/day, every-other-day/every-N-day and PRN schedules; Remewdy's current changelog documents real bugs from retroactive occurrence generation and prematurely marking future doses skipped.
-- FDA safety material supports preserving drug name/strength/form/route/instructions and a current list of prescription + OTC + supplements. PatiLife should store professional instructions, not invent universal missed-dose advice.
-- Refill/supply tracking recurs across medication-focused competitors and solves a different failure from adherence. Keep it optional and correction-friendly inside medication rather than create an inventory module.
-- AAHA's permanent vaccine record is substantially richer than name/date: product/manufacturer, serial/lot, expiry, administrator, route/site and adverse events can matter. PatiLife should expose these as progressive optional provenance fields while keeping the fast path small.
-- Vet visits work better as one durable timeline event with pre-visit reason/questions/current context and post-visit instructions, documents, medication changes and follow-up tasks, instead of disconnected appointment/note/document silos.
-- Document scanning/import is useful mainly as friction reduction. Original source attachment stays canonical; OCR/extraction must be reviewable and source-linked.
-- No new safe ad surface emerged. Health records, medication/vaccine, vet visits, documents and handoff remain trust-heavy and uninterrupted.
+**Evidence strength:** high for medication occurrence/schedule separation and vaccine provenance; medium-high for refill and visit continuity.
 
-**Contradictions / uncertainty**
-- Many 2026 medication apps have sparse independent reviews; feature convergence is competitive evidence, not satisfaction proof.
-- FDA/AAHA detail is authoritative but U.S.-centric; detailed provenance fields should not become mandatory worldwide.
-- Vaccine schedules depend on product/species/age/risk/region/veterinarian; evidence argues against a universal hard-coded booster calculator.
-- Refill forecasting has repeated competitor support but limited independent user-review volume; keep optional.
-- Turkish/French/Japanese current listings did not provide enough independent complaint volume to justify locale-specific health schemas.
+---
+
+### 2026-09-22 08:04 +08 — Multi-pet routine attribution, correction/backfill and feeding scope
+**Detailed snapshot:** `research/2026-09-22-0804-multipet-routine-attribution.md`
+
+**Scope:** multi-pet daily-care identity; feeding/water/litter routines; correction/backfill; Simplified Chinese/German/Turkish local-first patterns; pet-count/history monetization.
+
+**Accepted findings**
+- Multi-pet correctness is event-level: every normal care/health write needs explicit pet identity, and changing the active pet must not silently retarget an in-progress entry.
+- Shared litter/water/food can create genuinely ambiguous attribution. For applicable care types, a visibly unattributed/shared-resource observation is more truthful than forcing a pet; it must not become pet-specific health evidence until assigned.
+- Quick logs default to now, but durable events need editable occurrence date/time. `occurredAt` is distinct from created/updated metadata; reminder due/completion times remain separate.
+- Bulk actions can reduce taps but are risky. Any future multi-pet bulk action explicitly selects and previews affected pets; medication/health is never bulk-completed by default.
+- Core feeding remains a quick occurrence with optional amount/food/note. This run does not justify a universal calorie database, barcode scanner, pantry/inventory module or automatic nutrition prescription.
+- Current CN products provide additional evidence that no-account/offline/private-cloud/manual-backup approaches are viable product differentiators; network login must not gate local care.
+- Competitors commonly monetize pet count/history, but evidence does not establish user acceptance. No PatiLife pricing decision follows; existing records/export cannot become unreadable when entitlement changes.
+- Google Play's current disruptive-ads policy reinforces the existing ban on unexpected interstitials around user actions; no new safe ad placement emerged.
+
+**Evidence strength:** high for explicit pet attribution and editable occurrence time; medium-high for honest unattributed shared-resource records and bulk-action safeguards; insufficient for nutrition-suite expansion or pricing changes.
 
 **RESEARCH HANDOFF**
-- Separate medication definition/schedule from editable dose occurrences; enforce effective start/end so schedule edits do not create phantom historical misses. **Evidence: high.**
-- Support a compact recurrence core: one-time, fixed times/day, selected weekdays/every-N-days and PRN; richer cycles can remain later. **Evidence: high.**
-- Preserve optional medication safety/provenance fields and source prescription/label; record vet-provided missed-dose/storage/food instructions rather than generating medical advice. **Evidence: high.**
-- Add optional, correction-friendly supply/refill tracking inside medication. **Evidence: medium-high.**
-- Vaccine UI uses progressive disclosure: core given/next-due plus optional manufacturer/lot/expiry/clinic/route/site/source document; no universal auto-protocol. **Evidence: high.**
-- Model vet appointment/consultation as one durable visit event spanning preparation -> actual visit -> documents/instructions -> follow-up. **Evidence: medium-high.**
-- ADS_POLICY unchanged; pricing/package unresolved. **Evidence for new ad placement: insufficient.**
+- Data/event layer: explicit `petId` for ordinary writes; preserve `occurredAt` independently from audit timestamps and allow correction/backfill.
+- UX: keep active pet visually obvious in quick-log surfaces; freeze/confirm target pet for an in-progress entry rather than silently following a later switch.
+- Shared-resource observations: allow `unattributed` only for applicable event types and visually preserve uncertainty.
+- Bulk actions: explicit selected-pet scope + preview; never default bulk medication/health completion.
+- Feeding: prioritize fast logging and optional reusable food presets before considering calories/inventory/scanning.
+- ADS_POLICY and pricing remain unchanged.
 
 ---
