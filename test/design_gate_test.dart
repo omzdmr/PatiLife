@@ -92,10 +92,19 @@ void main() {
       shell(locale: const Locale('en'), themeMode: ThemeMode.light),
     );
 
-    expect(find.byType(NavigationDestination), findsNWidgets(4));
-    expect(find.byIcon(Icons.home_outlined), findsOneWidget);
-    expect(find.byIcon(Icons.favorite_border_rounded), findsOneWidget);
-    expect(find.byIcon(Icons.auto_stories_outlined), findsOneWidget);
-    expect(find.byIcon(Icons.pets_outlined), findsOneWidget);
+    final destinations = tester
+        .widgetList<NavigationDestination>(find.byType(NavigationDestination))
+        .toList();
+    expect(destinations, hasLength(4));
+    expect(destinations.map((item) => item.label),
+        <String>['Today', 'Health', 'Diary', 'Profile']);
+
+    // The selected destination renders selectedIcon, so inspect the
+    // destination contract instead of whichever icon variant is on-screen.
+    expect((destinations[0].icon as Icon).icon, Icons.home_outlined);
+    expect((destinations[0].selectedIcon! as Icon).icon, Icons.home_rounded);
+    expect((destinations[1].icon as Icon).icon, Icons.favorite_border_rounded);
+    expect((destinations[2].icon as Icon).icon, Icons.auto_stories_outlined);
+    expect((destinations[3].icon as Icon).icon, Icons.pets_outlined);
   });
 }
