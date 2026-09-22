@@ -164,3 +164,29 @@ This is the permanent research memory for PatiLife. Detailed source snapshots li
 - ADS_POLICY and pricing remain unchanged.
 
 ---
+
+### 2026-09-22 11:02 +08 — Walk/activity depth, puppy/kitten lens and location privacy
+**Detailed snapshot:** `research/2026-09-22-1102-activity-walk-puppy-location.md`
+
+**Scope:** walk/activity event semantics and GPS reliability; puppy/kitten development support; location privacy/battery; active-walk monetization. Market rotation: English/global + French + German + Japanese + Simplified Chinese + Korean. Korean evidence informed product research only; the current 10-locale localization contract remains unchanged.
+
+**Accepted findings**
+- A walk is a durable care/timeline event; GPS route/distance is optional attached evidence, not the source of truth. Missing/bad GPS must not erase a real walk, and manual correction/backfill remains valid.
+- Walk is a legitimate scoped multi-pet event: users may explicitly select several participating pets. This does not justify generic bulk health/medication writes.
+- GPS collection is contextual and bounded to an explicitly active walk. No always-on passive location/automatic-walk requirement was justified. Platform evidence and current reviews make battery/thermal/reliability a release concern, not an implementation footnote.
+- Raw route coordinates can reveal household routines and must stay outside advertising profiles and generic analytics. Local-first storage is preferred; route sharing/export is explicit.
+- Puppy/kitten depth belongs in a life-stage lens over existing quick logs, reminders, growth and Diary: potty/accident, meals/water, sleep, weight, socialization/handling observations and owner/vet-confirmed health reminders. No fifth puppy tab.
+- Developmental milestones are editable Diary/timeline observations/memories, not pass/fail health tests or a universal development score.
+- Breed/age activity targets, passive automatic walk detection, social route maps and sensor-derived sleep tracking remain unaccepted: competitor marketing is stronger than independent evidence.
+- No new safe ad surface emerged. Active walk controls, route correction/history/export and raw location are protected intended-action/data surfaces.
+
+**Evidence strength:** high for optional-GPS walk-event architecture, explicit walk lifecycle/location minimization and route privacy; medium-high for contextual puppy/kitten lens; insufficient for prescribed breed-based activity targets, automatic walk detection or new pricing.
+
+**RESEARCH HANDOFF**
+- Event layer: walk session supports selected participant pets, start/end/occurredAt, duration, optional manual distance, optional route attachment and correction; route failure never invalidates the event.
+- UX: GPS starts only from explicit walk action, active tracking is visible, Stop/Cancel/recovery and manual/no-GPS logging are first-class; keep it inside Today/Diary rather than a new tab.
+- Life stage: puppy/kitten preset tunes quick actions/checklists and Diary milestones; do not auto-create universal medical due dates from birthday alone.
+- Privacy/performance: raw route coordinates local-first and excluded from ad profiling/generic analytics; use minimum location scope and validate battery/thermal behavior.
+- DESIGN_SYSTEM, ADS_POLICY, pricing and localization contract remain unchanged.
+
+---
