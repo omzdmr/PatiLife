@@ -11,6 +11,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final textScale = MediaQuery.textScalerOf(context).scale(1);
+    final quickLogHeight = (82 + ((textScale - 1) * 18)).clamp(82, 100).toDouble();
     return PatiPage(
       title: l10n.greetingMorning,
       subtitle: l10n.todayWithPet('Misket'),
@@ -33,7 +35,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: PatiSpace.md),
           SizedBox(
-            height: 82,
+            height: quickLogHeight,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: QuickLogType.values.length,
