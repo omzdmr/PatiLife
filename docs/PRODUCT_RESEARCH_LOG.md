@@ -114,3 +114,28 @@ This is the permanent research memory for PatiLife. Detailed source snapshots li
 - ADS_POLICY and pricing remain unchanged.
 
 ---
+
+### 2026-09-22 09:23 +08 — Lost-pet readiness, grooming/dental routines and notification delivery semantics
+**Detailed snapshot:** `research/2026-09-22-0923-recovery-routine-reminder-semantics.md`
+
+**Scope:** lost-pet/recovery readiness; grooming/nail/dental home care; iOS/Android notification scheduling/permission behavior; reminder/recovery monetization. Market rotation: English/global + French + Japanese; Turkish-specific signal was too weak to create a requirement.
+
+**Accepted findings**
+- Lost-pet core value is readiness, not building a social network: canonical photo/identity/contact/microchip data can generate an offline/shareable Lost Pet Kit with incident-time last-seen details. Public matching/maps/hosted profiles remain later because they create backend, moderation, location/privacy and stale-data obligations.
+- Microchip registry/provider + verification metadata is further strengthened by current AAHA evidence; PatiLife must not imply that storing a chip number means the registry is current.
+- Grooming, nail trim and tooth brushing repeatedly appear as ordinary recurring care in current French/Japanese products. They belong as presets in the existing routine event/reminder vocabulary, not permanent modules/cards.
+- AAHA supports home dental-care history as clinically relevant context, but completion/streaks must not be presented as proof that dental disease is prevented or as a substitute for professional assessment.
+- Reminder occurrence state and notification delivery policy are separate. Routine, date-sensitive and genuinely time-sensitive reminders need different platform behavior; do not make every Android reminder an exact alarm or every iOS reminder Time Sensitive.
+- Notification permission is contextual and revocable. Denial/degraded delivery never deletes/completes the local occurrence; Today/overdue recovery remains authoritative.
+- No new safe ad/paywall surface emerged. Lost-pet recovery and reminder completion remain trust-heavy/intended-action surfaces.
+
+**Evidence strength:** high for microchip verification, routine-care consolidation and platform notification semantics; medium-high for local Lost Pet Kit; insufficient for public lost/found network or a pricing change.
+
+**RESEARCH HANDOFF**
+- Profile/Emergency: future Lost Pet Kit is a projection over canonical data plus incident-only last-seen fields; offline/shareable flyer/checklist first, public hosting later.
+- Routine care: add coat brushing/bath/nail trim/tooth brushing as presets inside existing quick-log/custom-care infrastructure.
+- Reminder architecture: separate occurrence status from delivery policy; support routine/date-sensitive/time-sensitive classes and platform capability/permission state.
+- Permission UX: ask when the user enables reminders, surface disabled/degraded state, never block local schedules/history.
+- ADS_POLICY and pricing remain unchanged.
+
+---
