@@ -55,13 +55,14 @@ void main() {
       (tester) async {
     await tester.pumpWidget(const PatiLifeApp());
 
+    // Follow the same implicit scroll-to-control behavior used by accessibility
+    // and keyboard-driven interaction instead of coupling this regression test
+    // to CustomScrollView internals or a fixed viewport height.
     final weightAction = find.text('Weight').first;
-    final homeScroll = find.byType(CustomScrollView).first;
-    await tester.dragUntilVisible(
-      weightAction,
-      homeScroll,
-      const Offset(0, -220),
-    );
+    await tester.ensureVisible(weightAction);
+    await tester.pumpAndSettle();
+
+    expect(tester.getCenter(weightAction).dy, lessThan(600));
     await tester.tap(weightAction);
     await tester.pumpAndSettle();
 
