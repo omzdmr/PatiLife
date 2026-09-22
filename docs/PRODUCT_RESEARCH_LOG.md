@@ -139,3 +139,28 @@ This is the permanent research memory for PatiLife. Detailed source snapshots li
 - ADS_POLICY and pricing remain unchanged.
 
 ---
+
+### 2026-09-22 10:07 +08 — Symptom episodes, lab provenance, senior/QoL and health-data privacy
+**Detailed snapshot:** `research/2026-09-22-1007-symptom-labs-qol-privacy.md`
+
+**Scope:** conditions/symptom episodes; longitudinal labs and vet handoff; senior/chronic QoL; health-data privacy/AI boundaries; health-insight monetization. Market rotation: English/global + German + Japanese + Simplified Chinese; Korean signal was insufficient for a market-specific requirement.
+
+**Accepted findings**
+- Symptoms are durable episodes/observations, not diagnoses: preserve occurrence/onset, optional resolution, severity/frequency, note/media and optional explicit linkage to a known condition. Logging a symptom never silently creates a diagnosis.
+- Lab usefulness starts with provenance: preserve collection date, original value/unit/reference interval/flag, source lab/clinic and source-report linkage. OCR/import remains reviewable; trend presentation does not turn an out-of-range value into a diagnosis.
+- Senior/chronic tracking should be opt-in and sustainable: a compact configurable check-in around observable dimensions plus good/bad-day context. Recognized QoL frameworks such as HHHHHMM may be supported explicitly, but PatiLife should not invent a universal pseudo-clinical health score.
+- AAHA explicitly frames QoL scales as support for, not replacement of, veterinarian conversations; current Ralph reviews add real longitudinal user evidence that simple daily tracking can remain usable for months and help owners communicate difficult changes.
+- Current 2026 privacy-first competitors increasingly make local/no-account/no-tracking boundaries part of the product value. Future PatiLife cloud/AI actions should be explicit, data-minimized and clear about outbound fields, retention and training use; local health history remains usable without AI.
+- Health records/content must not become advertising-profile input. No evidence justified rewarded/interstitial gates for symptoms, QoL, labs, trends or vet handoff; optional future compute-heavy AI can be monetized separately without locking the user's own records.
+
+**Evidence strength:** high for lab provenance/source linkage and QoL humility; medium-high for symptom episode structure and explicit AI data-flow disclosure; insufficient for AI triage/diagnosis, cross-lab automatic normalization or a new pricing model.
+
+**RESEARCH HANDOFF**
+- Shared timeline: add symptom episodes and senior/chronic observations to the existing event vocabulary rather than creating new tabs.
+- Conditions remain explicit facts; symptoms may link to a condition but never infer one automatically.
+- Labs: provenance/source document first, OCR/AI second. Preserve original values, units and reference intervals.
+- Senior mode: opt-in preset/profile adaptation; show underlying observations/trends before scores and use named recognized scales if a scale is offered.
+- Privacy: local core does not depend on AI. Future outbound AI/cloud processing is explicit and minimal; health data stays outside ad profiling.
+- ADS_POLICY and pricing remain unchanged.
+
+---
