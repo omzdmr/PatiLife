@@ -77,7 +77,7 @@ class PetPhotoSurface extends StatelessWidget {
     this.photo,
     this.borderRadius = PatiRadius.hero,
     this.child,
-    this.semanticLabel = 'Evcil hayvan fotoğrafı',
+    required this.semanticLabel,
   });
 
   final ImageProvider? photo;
@@ -91,6 +91,10 @@ class PetPhotoSurface extends StatelessWidget {
     return Semantics(
       image: true,
       label: semanticLabel,
+      // The localized label is the single accessibility representation of this
+      // composite visual. Decorative fallback art and hero-overlay text should
+      // not be announced a second time by VoiceOver/TalkBack.
+      excludeSemantics: true,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius),
         child: Stack(
@@ -173,6 +177,9 @@ class PatiIconTile extends StatelessWidget {
         button: true,
         label: label,
         hint: semanticHint,
+        // The visible icon/text remain visual children, while the explicit
+        // localized label + hint form one predictable screen-reader control.
+        excludeSemantics: true,
         child: InkWell(
           borderRadius: BorderRadius.circular(PatiRadius.medium),
           onTap: onTap,
