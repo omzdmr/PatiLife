@@ -60,6 +60,7 @@ The design reference lives at `docs/assets/patilife-design-reference.jpg` when a
 - Daily-care events use a shared vocabulary and durable timeline rather than isolated feature histories. Suggested quick actions may adapt to species, life stage and user preference.
 - Progressive disclosure is the default: routine/normal care should usually log in one or two actions; quantity, consistency, severity, media or notes appear only when useful.
 - Water tracking must allow qualitative/approximate observations because exact volume is not always measurable in multi-pet/shared-bowl homes.
+- Common at-home maintenance such as coat brushing, bathing, nail trimming and tooth brushing belongs as lightweight presets in the same routine event/reminder system, not as separate permanent modules. Professional grooming/dental visits remain distinguishable from at-home care.
 
 ### 4. Reminders
 - Vaccine due dates
@@ -70,7 +71,9 @@ The design reference lives at `docs/assets/patilife-design-reference.jpg` when a
 - Snooze, completion and missed-task recovery
 - Care occurrences use explicit `due / completed / skipped / missed` states; completion keeps timestamp and actor attribution so solo history can later support household coordination without a schema rewrite.
 - Dismissing or missing a notification must not silently count as task completion. Unresolved overdue occurrences remain recoverable from Today/history.
-- Notification permissions handled respectfully
+- Reminder occurrence state and notification delivery policy are separate concerns. The model must leave room for routine, date-sensitive and genuinely time-sensitive delivery classes; platform adapters choose appropriate OS behavior rather than forcing every Android reminder to exact alarms or every iOS reminder to Time Sensitive.
+- Notification capability/permission may be denied or later revoked. Degraded delivery must not block local schedules/history or erase/complete occurrences, and the UI should make disabled/degraded notification state understandable.
+- Notification permissions handled respectfully and requested contextually when a user enables reminder behavior rather than at cold start.
 
 ### 5. Diary and memories
 - Photo + short note entries
@@ -93,6 +96,9 @@ Future architecture must leave room for:
 ### 7. Emergency and travel
 - Emergency Card is an offline, read-only projection over existing Profile + Health facts rather than a separately maintained emergency database.
 - Default emergency facts: pet photo/name/species, ID/microchip, owner/emergency contacts, primary/emergency vet, allergies/conditions, active medications/critical instructions and key vaccination status.
+- A future Lost Pet Kit should also project canonical Profile/Emergency facts rather than create a new identity store. It may add incident-only last-seen date/time/location/notes and generate an offline/shareable flyer/checklist. Missing or stale contact/microchip-registry verification should be visible before an incident.
+- PatiLife must not imply that merely storing a microchip number registers/updates the chip, nor that shelters/registries were notified unless an actual integration completed that action.
+- Public lost-pet maps, community matching, hosted public profiles and live alerts remain optional/later because they introduce backend availability, moderation/abuse, location/privacy and stale-contact obligations.
 - Travel Pack may organize scans of official passports/certificates, vaccination/rabies information, microchip identity, medications, vet/emergency contacts and expiry/due dates, and generate an offline/printable summary.
 - A PatiLife-generated travel summary must never be represented as an official government/veterinary pet passport or animal health certificate. Official-document scans remain distinguishable from app-generated summaries.
 - Country-specific travel-rule guidance is optional/later and requires an authoritative maintained source; do not hard-code a static worldwide legal-rule encyclopedia into the core app.
@@ -142,6 +148,7 @@ Forbidden ad locations:
 - Medication and vaccine flows
 - Vet and health detail screens
 - Emergency information
+- Lost Pet Kit / active lost-pet recovery flow
 - Destructive confirmation flows
 - Any screen where an ad can be confused with a care action
 - Reminder completion, care logging, export or data-recovery actions
@@ -206,6 +213,9 @@ Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md` and the dated snapshots u
 - First-run setup is progressive: minimum pet identity reaches a useful local shell before nonessential health/profile enrichment, account prompts, monetization prompts or broad permission requests.
 - Accessibility is a release/store-trust requirement measured against common tasks, not a decorative afterthought or a separate mode.
 - Optional backup/recovery UX must preserve local authority and expose understandable recovery state rather than making sync success a prerequisite for care logging.
+- Lost-pet core is readiness-first: an offline/shareable Lost Pet Kit reuses canonical identity/contact/microchip data; public matching/community hosting remains optional/later.
+- Common grooming/nail/dental home care is modeled as routine-care presets/events, not separate top-level modules.
+- Reminder delivery has urgency classes independent from occurrence state; OS permissions/capabilities can degrade delivery without degrading the underlying local care record.
 
 ## Localization contract
 
