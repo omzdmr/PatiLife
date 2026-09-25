@@ -190,3 +190,31 @@ This is the permanent research memory for PatiLife. Detailed source snapshots li
 - DESIGN_SYSTEM, ADS_POLICY, pricing and localization contract remain unchanged.
 
 ---
+
+
+### 2026-09-26 +08 — Adaptive Care Journeys: before arrival through first month
+**Detailed snapshot:** `research/2026-09-26-adaptive-care-journeys.md`
+
+**Scope:** pre-adoption/pre-arrival preparation; first day/week/month adjustment; kitten/puppy and newly adopted adult variants; adaptive calendar semantics; guidance-vs-scheduled-care boundary.
+
+**Accepted findings**
+- The owner problem starts before arrival. Preparation, continuity questions, safe-space setup, household rules and first-vet planning are repeatedly supported by current AAHA/ASPCA guidance and owner questions.
+- Arrival is a distinct transition anchor. First-day/week guidance should be relative to planned/actual arrival, while birthday/life stage remains a separate anchor.
+- PatiLife should add a lightweight Care Journey orchestration layer over Today/reminders/timeline/profile rather than a new tab or article library.
+- Guidance suggestions and confirmed care are different objects/states. A suggestion may be marked already-done/not-applicable or explicitly promoted to a reminder/appointment; it must not silently become medical history.
+- Planned arrival may move and actual arrival may happen early/late. Relative suggestions should recompute without resurrecting completed/dismissed items. Vet-confirmed dates override generic timing suggestions to avoid duplicate/conflicting tasks.
+- Adjustment is individual. Time windows are prompts, not pass/fail milestones; readiness/context gates are preferable where appropriate.
+- Informational journey items do not deserve OS notifications by default. Today surfaces a small number of timely items; deeper journey/calendar detail is on demand.
+- No new safe ad placement was justified in arrival/first-week safety or medical-planning guidance.
+
+**Evidence strength:** high for pre-arrival + first-week journey value and suggestion-vs-confirmed-care separation; medium-high for adaptive arrival-date orchestration; insufficient for deterministic day-by-day adjustment scoring.
+
+**RESEARCH HANDOFF**
+- Add Care Journey semantics as orchestration/projection, not duplicate pet-care storage.
+- Support planned-arrival and actual-arrival anchors plus birthday/life-stage context.
+- Preserve suggestion states: suggested, accepted/scheduled, completed/already-done, skipped/not-applicable, snoozed.
+- Recalculation preserves user decisions; professional/source-confirmed dates supersede generic suggestions.
+- First slice: pre-arrival -> first day -> first week -> first month, with puppy/kitten and adopted-adult variants.
+- Keep four-tab shell, approved design system and ADS_POLICY unchanged.
+
+---
