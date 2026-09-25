@@ -61,7 +61,7 @@ class _WeightSummary extends StatelessWidget {
     return Semantics(
       label: '${l10n.weightTrend}: 2.4 kg, ${l10n.weightChange30}',
       child: Container(
-        height: 190,
+        constraints: const BoxConstraints(minHeight: 190),
         padding: const EdgeInsets.all(PatiSpace.lg),
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.dark
@@ -74,11 +74,13 @@ class _WeightSummary extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  l10n.weightTrend,
-                  style: Theme.of(context).textTheme.titleMedium,
+                Expanded(
+                  child: Text(
+                    l10n.weightTrend,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
-                const Spacer(),
+                const SizedBox(width: PatiSpace.sm),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -96,7 +98,7 @@ class _WeightSummary extends StatelessWidget {
                 ),
               ],
             ),
-            const Spacer(),
+            const SizedBox(height: PatiSpace.xl),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
