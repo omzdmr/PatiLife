@@ -40,6 +40,7 @@ Wire real first-run onboarding + multi-pet profile persistence, then feed the ac
 - Weight summary no longer relies on a fixed 190px height.
 - The localized weight-trend heading gets bounded horizontal space, and the localized 30-day change badge can wrap instead of forcing the row wider than the card.
 - At large text scales the numeric value and trend chart stack vertically; normal text keeps the compact side-by-side composition.
+- Health care-plan rows also switch from compact ListTile trailing badges to a vertical, wrap-safe badge layout at 160%+ text, preventing the next likely localized overflow once the weight summary is cleared.
 
 ### Validation / blocker
 - Existing `test/design_gate_test.dart` already reproduces both failing accessibility cases, so no duplicate regression test was added.
