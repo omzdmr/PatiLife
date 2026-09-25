@@ -81,44 +81,81 @@ class _WeightSummary extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: PatiSpace.sm),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: PatiColors.sage.withValues(alpha: .15),
-                    borderRadius: BorderRadius.circular(PatiRadius.pill),
-                  ),
-                  child: Text(
-                    l10n.weightChange30,
-                    style: const TextStyle(
-                      color: PatiColors.sageDeep,
-                      fontWeight: FontWeight.w800,
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: PatiColors.sage.withValues(alpha: .15),
+                      borderRadius: BorderRadius.circular(PatiRadius.pill),
+                    ),
+                    child: Text(
+                      l10n.weightChange30,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: PatiColors.sageDeep,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: PatiSpace.xl),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('2.4', style: Theme.of(context).textTheme.displaySmall),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5, left: 5),
-                  child: Text(
-                    'kg',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                  ),
-                ),
-                const Spacer(),
-                const SizedBox(
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final textScale = MediaQuery.textScalerOf(context).scale(1);
+                final stackContent =
+                    textScale >= 1.6 || constraints.maxWidth < 280;
+                final value = Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text('2.4', style: Theme.of(context).textTheme.displaySmall),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5, left: 5),
+                      child: Text(
+                        'kg',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
+                      ),
+                    ),
+                  ],
+                );
+                const chart = SizedBox(
                   width: 118,
                   height: 54,
                   child: CustomPaint(painter: _TrendPainter()),
-                ),
-              ],
+                );
+
+                if (stackContent) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      value,
+                      const SizedBox(height: PatiSpace.md),
+                      const Align(
+                        alignment: Alignment.centerRight,
+                        child: chart,
+                      ),
+                    ],
+                  );
+                }
+
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    value,
+                    const Spacer(),
+                    chart,
+                  ],
+                );
+              },
             ),
           ],
         ),
