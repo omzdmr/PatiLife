@@ -30,3 +30,21 @@ Until the visual milestone is explicitly closed:
 
 ### Next product slice after design gate
 Wire real first-run onboarding + multi-pet profile persistence, then feed the active pet and their chosen photo into the existing visual shell. After that, make quick logs persistent.
+
+
+## 2026-09-26 — Health large-text design-gate repair
+
+### Completed on work branch
+- Diagnosed main CI run 36182957074: localization generation and analyzer pass; the two remaining failures are Health weight-summary RenderFlex overflows in the existing German 200% dark-mode and Hindi 160% reduced-motion design-gate tests.
+- Prepared a focused Health responsive repair without changing the four-tab shell or visual language.
+- Weight summary no longer relies on a fixed 190px height.
+- The localized weight-trend heading gets bounded horizontal space, and the localized 30-day change badge can wrap instead of forcing the row wider than the card.
+- At large text scales the numeric value and trend chart stack vertically; normal text keeps the compact side-by-side composition.
+
+### Validation / blocker
+- Existing `test/design_gate_test.dart` already reproduces both failing accessibility cases, so no duplicate regression test was added.
+- GitHub connector write policy allowed creating commits/branches but blocked moving `main`, opening a PR, and issue #2 audit comments in this run. The coherent work is preserved on `work/patilife-health-a11y-v2` at commit `648d83fd58d33f7d6719f3158c1f6638659608c3`.
+- CI has not run against that work branch because PR creation was blocked; do not claim this repair green until Flutter CI verifies it.
+
+### Next executable step
+Land or PR the preserved Health repair after re-checking current main HEAD, run the existing DE 200% + HI reduced-motion design-gate matrix, then continue the design-shell accessibility pass. Once the design gate is green, resume the roadmap at real first-run pet creation -> migration-safe multi-pet local persistence -> active-pet/photo state.
