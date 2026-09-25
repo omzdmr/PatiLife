@@ -216,6 +216,10 @@ Evidence is recorded in `docs/PRODUCT_RESEARCH_LOG.md` and the dated snapshots u
 - Lost-pet core is readiness-first: an offline/shareable Lost Pet Kit reuses canonical identity/contact/microchip data; public matching/community hosting remains optional/later.
 - Common grooming/nail/dental home care is modeled as routine-care presets/events, not separate top-level modules.
 - Reminder delivery has urgency classes independent from occurrence state; OS permissions/capabilities can degrade delivery without degrading the underlying local care record.
+- PatiLife includes a lightweight **Care Journey** guidance layer for real-life transitions such as preparing for a pet, arrival/first day, first week/month and life-stage transitions. It reuses Today, reminders, timeline and profile data; it does not create a fifth tab or duplicate care-history store.
+- Care Journey guidance is distinct from confirmed care: contextual suggestions can be marked already done/not applicable or explicitly promoted into a reminder/appointment. Generic guidance must never silently create medical history or pretend to be a veterinarian-confirmed schedule.
+- Journey timing may use planned arrival, actual arrival and life-stage anchors. If pickup/adoption happens early or late, relative suggestions recompute while preserving completed/dismissed decisions; source/vet-confirmed dates supersede generic timing suggestions rather than creating duplicates.
+- Adjustment guidance is adaptive rather than pass/fail. Calendar windows can prompt preparation or observation, but individual settling/decompression is not scored against a universal day-by-day deadline.
 
 ## Localization contract
 
