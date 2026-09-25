@@ -265,45 +265,81 @@ class _HealthRow extends StatelessWidget {
   final bool badgeWarm;
 
   @override
-  Widget build(BuildContext context) => ListTile(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-        minTileHeight: 68,
-        leading: Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            color: PatiColors.sage.withValues(alpha: .12),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Icon(icon, color: PatiColors.sageDeep, size: 21),
-        ),
-        title: Text(title, style: Theme.of(context).textTheme.titleMedium),
-        subtitle: Text(subtitle),
-        trailing: badge != null
-            ? Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
-                decoration: BoxDecoration(
-                  color: (badgeWarm ? PatiColors.peach : PatiColors.sage)
-                      .withValues(alpha: .13),
-                  borderRadius: BorderRadius.circular(PatiRadius.pill),
-                ),
-                child: Text(
-                  badge!,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: badgeWarm
-                            ? PatiColors.warning
-                            : PatiColors.sageDeep,
-                      ),
-                ),
-              )
-            : Icon(
+  Widget build(BuildContext context) {
+    final textScale = MediaQuery.textScalerOf(context).scale(1);
+    final badgeWidget = badge == null
+        ? null
+        : Container(
+            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+            decoration: BoxDecoration(
+              color: (badgeWarm ? PatiColors.peach : PatiColors.sage)
+                  .withValues(alpha: .13),
+              borderRadius: BorderRadius.circular(PatiRadius.pill),
+            ),
+            child: Text(
+              badge!,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color:
+                        badgeWarm ? PatiColors.warning : PatiColors.sageDeep,
+                  ),
+            ),
+          );
+    final leading = Container(
+      width: 44,
+      height: 44,
+      decoration: BoxDecoration(
+        color: PatiColors.sage.withValues(alpha: .12),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Icon(icon, color: PatiColors.sageDeep, size: 21),
+    );
+
+    if (textScale >= 1.6) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            leading,
+            const SizedBox(width: PatiSpace.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: Theme.of(context).textTheme.titleMedium),
+                  const SizedBox(height: 4),
+                  Text(subtitle),
+                  if (badgeWidget != null) ...[
+                    const SizedBox(height: PatiSpace.sm),
+                    Align(alignment: Alignment.centerLeft, child: badgeWidget),
+                  ],
+                ],
+              ),
+            ),
+            if (badgeWidget == null)
+              Icon(
                 Icons.chevron_right_rounded,
                 color: Theme.of(context).colorScheme.outline,
               ),
+          ],
+        ),
       );
+    }
+
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+      minTileHeight: 68,
+      leading: leading,
+      title: Text(title, style: Theme.of(context).textTheme.titleMedium),
+      subtitle: Text(subtitle),
+      trailing: badgeWidget ??
+          Icon(
+            Icons.chevron_right_rounded,
+            color: Theme.of(context).colorScheme.outline,
+          ),
+    );
+  }
 }
 
 class _RecordShortcut extends StatelessWidget {
