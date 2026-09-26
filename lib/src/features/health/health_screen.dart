@@ -61,7 +61,7 @@ class _WeightSummary extends StatelessWidget {
     return Semantics(
       label: '${l10n.weightTrend}: 2.4 kg, ${l10n.weightChange30}',
       child: Container(
-        height: 190,
+        constraints: const BoxConstraints(minHeight: 190),
         padding: const EdgeInsets.all(PatiSpace.lg),
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.dark
@@ -74,49 +74,88 @@ class _WeightSummary extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  l10n.weightTrend,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const Spacer(),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: PatiColors.sage.withValues(alpha: .15),
-                    borderRadius: BorderRadius.circular(PatiRadius.pill),
-                  ),
+                Expanded(
                   child: Text(
-                    l10n.weightChange30,
-                    style: const TextStyle(
-                      color: PatiColors.sageDeep,
-                      fontWeight: FontWeight.w800,
+                    l10n.weightTrend,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+                const SizedBox(width: PatiSpace.sm),
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: PatiColors.sage.withValues(alpha: .15),
+                      borderRadius: BorderRadius.circular(PatiRadius.pill),
+                    ),
+                    child: Text(
+                      l10n.weightChange30,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: PatiColors.sageDeep,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-            const Spacer(),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('2.4', style: Theme.of(context).textTheme.displaySmall),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5, left: 5),
-                  child: Text(
-                    'kg',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                  ),
-                ),
-                const Spacer(),
-                const SizedBox(
+            const SizedBox(height: PatiSpace.xl),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final textScale = MediaQuery.textScalerOf(context).scale(1);
+                final stackContent =
+                    textScale >= 1.6 || constraints.maxWidth < 280;
+                final value = Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text('2.4', style: Theme.of(context).textTheme.displaySmall),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5, left: 5),
+                      child: Text(
+                        'kg',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
+                      ),
+                    ),
+                  ],
+                );
+                const chart = SizedBox(
                   width: 118,
                   height: 54,
                   child: CustomPaint(painter: _TrendPainter()),
-                ),
-              ],
+                );
+
+                if (stackContent) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      value,
+                      const SizedBox(height: PatiSpace.md),
+                      const Align(
+                        alignment: Alignment.centerRight,
+                        child: chart,
+                      ),
+                    ],
+                  );
+                }
+
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    value,
+                    const Spacer(),
+                    chart,
+                  ],
+                );
+              },
             ),
           ],
         ),
@@ -226,45 +265,81 @@ class _HealthRow extends StatelessWidget {
   final bool badgeWarm;
 
   @override
-  Widget build(BuildContext context) => ListTile(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-        minTileHeight: 68,
-        leading: Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            color: PatiColors.sage.withValues(alpha: .12),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Icon(icon, color: PatiColors.sageDeep, size: 21),
-        ),
-        title: Text(title, style: Theme.of(context).textTheme.titleMedium),
-        subtitle: Text(subtitle),
-        trailing: badge != null
-            ? Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
-                decoration: BoxDecoration(
-                  color: (badgeWarm ? PatiColors.peach : PatiColors.sage)
-                      .withValues(alpha: .13),
-                  borderRadius: BorderRadius.circular(PatiRadius.pill),
-                ),
-                child: Text(
-                  badge!,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: badgeWarm
-                            ? PatiColors.warning
-                            : PatiColors.sageDeep,
-                      ),
-                ),
-              )
-            : Icon(
+  Widget build(BuildContext context) {
+    final textScale = MediaQuery.textScalerOf(context).scale(1);
+    final badgeWidget = badge == null
+        ? null
+        : Container(
+            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+            decoration: BoxDecoration(
+              color: (badgeWarm ? PatiColors.peach : PatiColors.sage)
+                  .withValues(alpha: .13),
+              borderRadius: BorderRadius.circular(PatiRadius.pill),
+            ),
+            child: Text(
+              badge!,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color:
+                        badgeWarm ? PatiColors.warning : PatiColors.sageDeep,
+                  ),
+            ),
+          );
+    final leading = Container(
+      width: 44,
+      height: 44,
+      decoration: BoxDecoration(
+        color: PatiColors.sage.withValues(alpha: .12),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Icon(icon, color: PatiColors.sageDeep, size: 21),
+    );
+
+    if (textScale >= 1.6) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            leading,
+            const SizedBox(width: PatiSpace.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: Theme.of(context).textTheme.titleMedium),
+                  const SizedBox(height: 4),
+                  Text(subtitle),
+                  if (badgeWidget != null) ...[
+                    const SizedBox(height: PatiSpace.sm),
+                    Align(alignment: Alignment.centerLeft, child: badgeWidget),
+                  ],
+                ],
+              ),
+            ),
+            if (badgeWidget == null)
+              Icon(
                 Icons.chevron_right_rounded,
                 color: Theme.of(context).colorScheme.outline,
               ),
+          ],
+        ),
       );
+    }
+
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+      minTileHeight: 68,
+      leading: leading,
+      title: Text(title, style: Theme.of(context).textTheme.titleMedium),
+      subtitle: Text(subtitle),
+      trailing: badgeWidget ??
+          Icon(
+            Icons.chevron_right_rounded,
+            color: Theme.of(context).colorScheme.outline,
+          ),
+    );
+  }
 }
 
 class _RecordShortcut extends StatelessWidget {
